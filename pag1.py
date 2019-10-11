@@ -10,3 +10,10 @@ def home():
         pass
     else:
         return render_template('home.html')
+
+@app.route('/cadastro', methods=['GET', 'POST'])
+def cadastrar():
+    pass
+
+webbrowser.open('http:\\localhost:5000', new=2)
+app.run(debug=True)
