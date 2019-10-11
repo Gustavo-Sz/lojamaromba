@@ -1,7 +1,8 @@
 from flask import Flask, render_template, session, flash, redirect, url_for
 import webbrowser, sqlite3, os
 
-app = Flask(__name__)
+STATIC_DIR = os.path.abspath('../static')
+app = Flask(__name__, static_folder=STATIC_DIR)
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
