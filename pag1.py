@@ -1,8 +1,8 @@
 from flask import Flask, render_template, session, flash, redirect, url_for
 import webbrowser, sqlite3, os
 
-STATIC_DIR = os.path.abspath('../static')
-app = Flask(__name__, static_folder=STATIC_DIR)
+app = Flask(__name__)
+
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
@@ -12,9 +12,11 @@ def home():
     else:
         return render_template('home.html')
 
+
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastrar():
     pass
+
 
 webbrowser.open('http:\\localhost:5000', new=2)
 app.run(debug=True)
