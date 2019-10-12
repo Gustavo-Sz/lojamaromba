@@ -2,18 +2,34 @@ body {
     background-color: rgba(21, 138, 188, 0.92);
 }
 
-#butaocadastrar {
+#butoes {
     background: #393939;
+    position: relative;
+    left: -0.6%;
+    top: -0.2cm;
     font-family: "Roboto", Helvetica, Arial, sans-serif;
     font-weight: 5px;
     font-size: 9px;
-    height: 30px;
-    line-height: 30px;
-    padding: 0px 20px 0px 20px;
+    height: 50px;
+    width: 101.2%;
     text-transform: uppercase ;
 }
 
-#btn1 {
-    border: 2px solid red;
-    border-radius: 30px;
+#btn1{
+    position: relative;
+    left: 88%;
+    top: 20%;
+    height: 25px;
+    border: 2px solid rgb(108, 108, 108);
+    background-color: rgb(108, 108, 108);
+    border-radius: 50px;
+}
+#btn2 {
+    position: relative;
+    left: 87.6%;
+    top: 20%;
+    height: 25px;
+    border: 2px solid rgb(108, 108, 108);
+    background-color: rgb(108, 108, 108);
+    border-radius: 50px;
 }
