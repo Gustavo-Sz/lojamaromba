@@ -59,7 +59,7 @@ def logar():
                 flash("Senha errada !")
         else:
             flash("Email não cadastrado !")
-    return redirect(url_for('logar'))
+    return render_template("logar.html")
 
 
 webbrowser.open('http:\\localhost:5000', new=1)
