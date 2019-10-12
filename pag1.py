@@ -18,5 +18,5 @@ def cadastrar():
     pass
 
 
-webbrowser.open('http:\\localhost:5000', new=2)
+webbrowser.open('http:\\localhost:5000', new=1)
 app.run(debug=True)

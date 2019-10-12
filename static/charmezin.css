@@ -1,5 +1,5 @@
 body {
-    background-color: black;
+    background-color: thistle;
 }
  .butaocadastrar {
     background: #393939;
@@ -9,9 +9,5 @@ body {
     height: 30px;
     line-height: 30px;
     padding: 0px 20px 0px 20px;
-    text-transform: uppercase 
-}
-
-.botton1 {
-    background-color:teal ;
+    text-transform: uppercase ;
 }
