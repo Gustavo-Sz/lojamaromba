@@ -1,7 +1,8 @@
 body {
-    background-color: thistle;
+    background-color: rgba(21, 138, 188, 0.92);
 }
- .butaocadastrar {
+
+#butaocadastrar {
     background: #393939;
     font-family: "Roboto", Helvetica, Arial, sans-serif;
     font-weight: 5px;
@@ -10,4 +11,9 @@ body {
     line-height: 30px;
     padding: 0px 20px 0px 20px;
     text-transform: uppercase ;
+}
+
+#btn1 {
+    border: 2px solid red;
+    border-radius: 30px;
 }
