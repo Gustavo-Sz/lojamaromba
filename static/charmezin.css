@@ -4,7 +4,7 @@ body {
 
 #butoes {
     background: #393939;
-    position: relative;
+    position: fixed;
     left: -0.6%;
     top: -0.2cm;
     font-family: "Roboto", Helvetica, Arial, sans-serif;
