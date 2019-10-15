@@ -11,16 +11,17 @@
             <header id="butoes">
                 <span>
                 {% if login: %}
-                    <class id="btn4">\
-                        <a href="{{url_for('carrinho')}}">
-                            <button id="bt4">**IMAGEM DE CARRINHO AQUI**</button>
+                    {% if admin: %}
+                        <a href="{{url_for('editar_catalogo')}}">
+                            <button id="btn5">Editar Catálogo</button>
                         </a>
-                    </class> 
-                    <class id="btn3">
-                        <a href="{{url_for('minha-conta')}}">
-                            <button id="bt3">Minha Conta</button>
-                        </a>
-                    </class>
+                    {% endif %}
+                    <a href="{{url_fro('carrinho')}}">
+                        <button id="btn4">**IMAGEM DE CARRINHO AQUI**</button>
+                    </a>
+                    <a href="{{url_for('minha-conta')}}">
+                        <button id="btn3">Minha Conta</button>
+                    </a>
                 {% else: %}
                     <class id="btn2">
                         <a href="{{url_for('logar')}}">

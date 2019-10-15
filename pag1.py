@@ -7,7 +7,11 @@ app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('home.html', login=session.get('logado'))
+
+    caminho = os.path("static")
+    caminho = os.path.join(caminho, "logo.png")
+
+    return render_template('home.html', login=session.get('logado'), admin = session.get('admin'), end = caminho)
 
 
 @app.route('/cadastro', methods=['GET', 'POST'])
@@ -25,7 +29,6 @@ def cadastrar():
         db.close()
 
         if email in emailsdb:
-            sucess = False
             flash("Email já cadastrado !")
         else:
             global usuario
@@ -49,6 +52,10 @@ def logar():
         senhadb = cursor.fetchall()
         db.close()
 
+        if((email=="admin")and(senha=="admin")):
+            session['admin'] = True
+            return redirect(url_for('home'))
+        
         if senhadb:
             if senha in senhadb:
                 global usuario
