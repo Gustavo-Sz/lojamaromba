@@ -1,79 +1,47 @@
-body {
-
-    background-color: rgba(4, 4, 4, 0.92);
-}
-
-#butoes {
-
-    background: #393939;
-    position: fixed;
-    left: -0.6%;
-    top: -0.2cm;
-    font-family: "Roboto", Helvetica, Arial, sans-serif;
-    font-weight: 5px;
-    font-size: 9px;
-    height: 50px;
-    width: 101.2%;
-    text-transform: uppercase ;
-}
-
-#btn1 {
-
-    position: relative;
-    left: 88%;
-    top: 20%;
-    height: 25px;
-}
-
-button {
-
-    border: 2px solid #ff734a;
-    background-color: #ff734a;
-    border-radius: 50px;
-}
-
-#btn2 {
-
-    position: relative;
-    left: 87.6%;
-    top: 20%;
-    height: 25px;
-}
-
-/* #bt2 {
-    border: 2px solid rgb(108, 108, 108);
-    background-color: rgb(108, 108, 108);
-    border-radius: 50px;
-} */
-
-#cadastro {
-    border: 5px white;
-    position: absolute;
-    left:40%;
-    bottom:35%;
-
-}
-
-h3 {
-    position:relative;
-    left:45%;
-    color:#ff9473;
-    font-size: 17px;
-}
-
-#bt6{   
- 
-    position:relative;
-    left:40%;
-
-}
-
-input {
-    border: 1px solid #ff734a;
-    height:24px;
-    width:300;
-    border-radius:10px;
-    background-color:transparent;
-    color:#ff734a;
-    
-}
+<html>
+<head>
+    <title>Cadastramento</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='cdt.css') }}">
+</head>
+<body>
+        <header id="butoes">
+                <span>
+                {% if login: %}
+                    {% if admin: %}
+                        <a href="{{url_for('editar_catalogo')}}">
+                            <button id="bt5">Editar Catálogo</button>
+                        </a>
+                    {% endif %}
+                    <a href="{{url_fro('carrinho')}}">
+                        <button id="bt4">**IMAGEM DE CARRINHO AQUI**</button>
+                    </a>
+                    <a href="{{url_for('minha-conta')}}">
+                        <button id="bt3">Minha Conta</button>
+                    </a>
+                {% else: %}
+                    <class id="btn2">
+                        <a href="{{url_for('logar')}}">
+                            <button id="bt2">Entrar</button>
+                        </a>
+                    </class>
+                    <class id="btn1">
+                        <a href="{{url_for('cadastrar')}}">
+                            <button id="bt1">Cadastre-se</button>
+                        </a>
+                    </class>
+                {% endif %}
+                </span>
+            </header> 
+    <class id="cadastro">
+        <form action="/cadastro" method="POST" id="form1">
+            <h3>Nome</h3>
+            <input type="text" name="nome"><br><BR>
+            <h3>Senha</h3>
+            <input type="password" name="senha"><br><BR>
+            <h3>Email</h3>
+            <input type="string" name="email"><br><BR>
+        </form><BR>
+        <button type="submit" form="form1" value="cadastrar" id="bt6">Cadastrar</button>
+    </class>
+</body>
+</html>
