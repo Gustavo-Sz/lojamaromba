@@ -60,7 +60,7 @@ h3 {
     font-size: 17px;
 }
 
-button{
+.btn5{
     
     position:relative;
     left:25%;
@@ -72,5 +72,5 @@ input {
     height:24px;
     border-radius:10px;
     background-color:transparent;
-
+    color:#ff734a;
 }
