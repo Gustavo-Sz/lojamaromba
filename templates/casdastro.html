@@ -1,0 +1,16 @@
+<html>
+<head>
+<tittle>
+Cadastramento
+</tittle>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='charmezin.css')}}">
+</head>
+<body>
+<form action="/cadastro" method="POST" id="form1">
+<input type="text" name="nome">
+<input type="string" name="senha">
+<input type="string" name="email">
+</form>
+<button type="submit" form="form1" value="cadastrar" id="btn5">Cadastrar</button>
+</body>
+</html>
