@@ -29,7 +29,6 @@ def cadastrar():
         db.close()
 
         if email in emailsdb:
-            sucess = False
             flash("Email já cadastrado !")
         else:
             global usuario

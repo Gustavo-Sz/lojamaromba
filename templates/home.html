@@ -7,8 +7,8 @@
         </title>
     </head>
         <body>
-            <img src="{{end}}">
-            <header id="butoes">
+            <img src="{{url_for('static', filename='logo.png')}}">
+            <class id="butoes">
                 <span>
                 {% if login: %}
                     {% if admin: %}
@@ -23,15 +23,19 @@
                         <button id="btn3">Minha Conta</button>
                     </a>
                 {% else: %}
-                    <a href="{{url_for('logar')}}">
-                        <button id="btn2">Entrar</button>
-                    </a>
-                    <a href="{{url_for('cadastrar')}}">
-                        <button id="btn1">Cadastre-se</button>
-                    </a>
+                    <class id="btn2">
+                        <a href="{{url_for('logar')}}">
+                            <button id="bt2">Entrar</button>
+                        </a>
+                    </class>
+                    <class id="btn1">
+                        <a href="{{url_for('cadastrar')}}">
+                            <button id="bt1">Cadastre-se</button>
+                        </a>
+                    </class>
                 {% endif %}
                 </span>
-            </header> 
+            </class> 
             {% for x in range(0,100): %}
                 <br>
             {% endfor %}
