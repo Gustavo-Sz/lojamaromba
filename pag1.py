@@ -8,8 +8,10 @@ app = Flask(__name__)
 @app.route("/", methods=['GET', 'POST'])
 def home():
 
-    
-    return render_template('home.html', login=session.get('logado'))
+    caminho = os.path("static")
+    caminho = os.path.join(caminho, "logo.png")
+
+    return render_template('home.html', login=session.get('logado'), end = caminho)
 
 
 @app.route('/cadastro', methods=['GET', 'POST'])
