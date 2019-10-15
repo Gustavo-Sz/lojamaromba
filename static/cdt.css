@@ -45,3 +45,35 @@ button {
     background-color: rgb(108, 108, 108);
     border-radius: 50px;
 } */
+
+#cadastro {
+    border: 5px white;
+    position: absolute;
+    left:40%;
+    bottom:35%;
+
+}
+
+h3 {
+    position:relative;
+    left:45%;
+    color:#ff9473;
+    font-size: 17px;
+}
+
+.bt6{   
+ 
+    position:relative;
+    left:50%;
+
+}
+
+input {
+    border: 1px solid #ff734a;
+    height:24px;
+    width:300;
+    border-radius:10px;
+    background-color:transparent;
+    color:#ff734a;
+    
+}
