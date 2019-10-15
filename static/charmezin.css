@@ -43,8 +43,15 @@ button {
 
 #cadastro {
 
-    position: relative;
-    left:50%;
+    position: absolute;
+    left:48%;
     bottom:50%;
 
+}
+
+h3{
+    position: absolute;
+    left:48%;
+    bottom:50%;
+    font-size: 20px;
 }
