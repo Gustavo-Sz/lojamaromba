@@ -1,8 +1,10 @@
 body {
-    background-color: rgba(21, 138, 188, 0.92);
+
+    background-color: rgba(4, 4, 4, 0.92);
 }
 
 #butoes {
+
     background: #393939;
     position: fixed;
     left: -0.6%;
@@ -15,7 +17,8 @@ body {
     text-transform: uppercase ;
 }
 
-#btn1{
+#btn1 {
+
     position: relative;
     left: 88%;
     top: 20%;
@@ -23,12 +26,14 @@ body {
 }
 
 button {
-    border: 2px solid rgb(108, 108, 108);
-    background-color: rgb(108, 108, 108);
+
+    border: 2px solid #ff734a;
+    background-color: #ff734a;
     border-radius: 50px;
 }
 
 #btn2 {
+
     position: relative;
     left: 87.6%;
     top: 20%;
@@ -44,14 +49,28 @@ button {
 #cadastro {
 
     position: absolute;
-    left:48%;
+    left:45%;
     bottom:50%;
 
 }
 
-h3{
-    position: absolute;
-    left:48%;
-    bottom:50%;
-    font-size: 20px;
+h3 {
+
+    color:#ff9473;
+    font-size: 17px;
+}
+
+button{
+    
+    position:relative;
+    left:25%;
+
+}
+
+input {
+    border: 1px solid #ff734a;
+    height:24px;
+    border-radius:10px;
+    background-color:transparent;
+
 }
