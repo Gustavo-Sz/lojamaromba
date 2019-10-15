@@ -65,6 +65,22 @@ def logar():
             flash("Email não cadastrado !")
     return render_template("logar.html")
 
+@app.route('/editar', methods=['GET', 'POST'])
+def editar_catalogo():
+    produto = Produto()
+    produto.nome = request.form['nome']
+    produto.categoria = request.form['categoria']
+    produto.preco = request.form['preco']
+    cursor.execute( #INSERE DADOS NA TABELA
+    """
+        INSERT INTO itens (nome,preço,categoria)
+        VALUES("{}","{}","{}");
+    """.format(produto.nome, produto.preco, produto.categoria)    
+    )
+
+    return render_template("editar_catalogo.html")
+
+
 
 webbrowser.open('http:\\localhost:5000', new=1)
 app.run(debug=True)
