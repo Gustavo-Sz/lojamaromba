@@ -20,16 +20,31 @@ body {
     left: 88%;
     top: 20%;
     height: 25px;
+}
+
+button {
     border: 2px solid rgb(108, 108, 108);
     background-color: rgb(108, 108, 108);
     border-radius: 50px;
 }
+
 #btn2 {
     position: relative;
     left: 87.6%;
     top: 20%;
     height: 25px;
+}
+
+/* #bt2 {
     border: 2px solid rgb(108, 108, 108);
     background-color: rgb(108, 108, 108);
     border-radius: 50px;
+} */
+
+#cadastro {
+
+    position: relative;
+    left:50%;
+    bottom:50%;
+
 }
