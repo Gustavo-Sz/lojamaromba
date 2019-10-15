@@ -11,6 +11,11 @@
             <header id="butoes">
                 <span>
                 {% if login: %}
+                    {% if admin: %}
+                        <a href="{{url_for('editar_catalogo')}}">
+                            <button id="btn5">Editar Catálogo</button>
+                        </a>
+                    {% endif %}
                     <a href="{{url_fro('carrinho')}}">
                         <button id="btn4">**IMAGEM DE CARRINHO AQUI**</button>
                     </a>

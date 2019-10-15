@@ -11,7 +11,7 @@ def home():
     caminho = os.path("static")
     caminho = os.path.join(caminho, "logo.png")
 
-    return render_template('home.html', login=session.get('logado'), end = caminho)
+    return render_template('home.html', login=session.get('logado'), admin = session.get('admin'), end = caminho)
 
 
 @app.route('/cadastro', methods=['GET', 'POST'])
@@ -53,6 +53,10 @@ def logar():
         senhadb = cursor.fetchall()
         db.close()
 
+        if((email=="admin")and(senha=="admin")):
+            session['admin'] = True
+            return redirect(url_for('home'))
+        
         if senhadb:
             if senha in senhadb:
                 global usuario
