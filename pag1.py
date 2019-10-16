@@ -20,7 +20,7 @@ def cadastrar():
         email = request.form['email']
         senha = request.form['senha']
 
-        if nome is not "" or email is not "" or senha is not"":
+        if nome is not "" and email is not "" and senha is not"":
             db = sqlite3.connect(r"{}\db.db".format(os.getcwd()))
             cursor = db.cursor()
             cursor.execute("""SELECT email FROM usuarios""")
@@ -43,7 +43,7 @@ def logar():
     if request.method == "POST":
         email = request.form['email']
         senha = request.form['senha']
-        if email is not "" or senha is not "":
+        if email is not "" and senha is not "":
             db = sqlite3.connect(r"{}\db.db".format(os.getcwd()))
             cursor = db.cursor()
             cursor.execute("""SELECT senha FROM usuarios WHERE email = '{}'""".format(email))
@@ -52,6 +52,7 @@ def logar():
 
             if (email == "admin" and senha == "admin"):
                 session['admin'] = True
+                session['logado'] = True
                 return redirect(url_for('home'))
             if senhadb:
                 if senha in senhadb:
@@ -65,11 +66,11 @@ def logar():
                 flash("Email não cadastrado !")
         else:
             flash("Preencha todos os campos !")
-    return render_template("login.html")
+    return render_template("login.html", novos =  [[],[],[]] , promo = ["nome1", "nome2", "nome3"])
 
 
 @app.route('/editar', methods=['GET', 'POST'])
-def editar_catalogo():
+def editarCatalogo():
     produto = Produto()
     produto.nome = request.form['nome']
     produto.categoria = request.form['categoria']
@@ -83,6 +84,13 @@ def editar_catalogo():
 
     return render_template("editar_catalogo.html")
 
+@app.route('/carrinho', methods=['GET', 'POST'])
+def carrinho():
+    pass
+
+@app.route('/conta', methods=['GET', 'POST'])
+def minhaConta():
+    pass
 
 webbrowser.open('http:\\localhost:5000', new=1)
 app.run(debug=True)

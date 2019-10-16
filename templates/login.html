@@ -5,19 +5,19 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='cdt.css') }}">
     </head>
     <body>
-        <img src="https://i.ibb.co/G95jC4s/logo.jpg">
+        <img id="img1" src="https://i.ibb.co/G95jC4s/logo.jpg">
         <header id="butoes">
                 <span>
                 {% if login: %}
                     {% if admin: %}
-                        <a href="{{url_for('editar_catalogo')}}">
+                        <a href="{{url_for('editarCatalogo')}}">
                             <button id="bt5">Editar Catálogo</button>
                         </a>
                     {% endif %}
-                    <a href="{{url_fro('carrinho')}}">
-                        <button id="bt4">**IMAGEM DE CARRINHO AQUI**</button>
+                    <a href="{{url_for('carrinho')}}">
+                        <button id="bt4"><img id="img2" src="https://i.ibb.co/Qc5HNGJ/carrinho.png"></button>
                     </a>
-                    <a href="{{url_for('minha-conta')}}">
+                    <a href="{{url_for('minhaConta')}}">
                         <button id="bt3">Minha Conta</button>
                     </a>
                 {% else: %}

@@ -15,27 +15,51 @@ body {
     height: 70px;
     width: 101.2%;
     text-transform: uppercase ;
-}
- #bt2{
-   position:relative;
-   left:87.5%;
+  }
+  #bt2{
+    position:relative;
+    left:87.5%;
+  }
+ 
+  #bt1{
+    position:relative;
+    left:88%;
+  }
+
+  #bt3{
+    position:absolute;
+    top:25%;
+    left:93%;
+    height:40px;
+    width:94px;
+   }
+   
+   #bt4{
+    position:absolute;
+    top:25%;
+    left:89%;
+    height:40px;
+    width:40px;
+   }
+   
+   #bt5{
+    position:absolute;
+    top:25%;
+    left:80.5%;
+    height:40px;
+    width:110px;
+   }
+   
+   #bt2, #bt1 {
+   
+       position: relative;
+       top: 35%;
+       height: 25px;
+   }
+ 
+ #bt2:hover,#bt1:hover,#bt3:hover,#bt4:hover,#bt5:hover {
+   background-color:#e48b71;
  }
-
- #bt1{
-   position:relative;
-   left:88%;
- }
-
-#bt2, #bt1 {
-
-    position: relative;
-    top: 35%;
-    height: 25px;
-}
-
-#bt2:hover,#bt1:hover {
-  background-color:#e48b71;
-}
 
 button {
     
@@ -84,12 +108,21 @@ ul {
     
   }
 
-img {
+  #img1 {
     position:fixed;
     z-index: 1;
     top:0.5%;
     width:219px;
     height:58;
+}
+
+#img2{
+  position: fixed;
+  z-index: 1;
+  top:2.4%;
+  left:89.9%;
+  width:30px;
+  height:30px;
 }
 
 #cdt {
