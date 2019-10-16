@@ -40,9 +40,7 @@ def cadastrar():
 
 @app.route('/entrar', methods=['GET', 'POST'])
 def logar():
-
     if request.method == "POST":
-
         email = request.form['email']
         senha = request.form['senha']
 
@@ -52,10 +50,9 @@ def logar():
         senhadb = cursor.fetchall()
         db.close()
 
-        if((email=="admin")and(senha=="admin")):
+        if (email == "admin" and senha == "admin"):
             session['admin'] = True
             return redirect(url_for('home'))
-        
         if senhadb:
             if senha in senhadb:
                 global usuario
@@ -64,9 +61,10 @@ def logar():
                 return redirect(url_for('home'))
             else:
                 flash("Senha errada !")
-        else:
-            flash("Email não cadastrado !")
+    else:
+        flash("Email não cadastrado !")
     return render_template("login.html")
+
 
 @app.route('/editar', methods=['GET', 'POST'])
 def editar_catalogo():
@@ -82,7 +80,6 @@ def editar_catalogo():
     )
 
     return render_template("editar_catalogo.html")
-
 
 
 webbrowser.open('http:\\localhost:5000', new=1)
