@@ -1,9 +1,11 @@
+<!DOCTYPE html5>
 <html>
-<head>
-    <title>Cadastramento</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='cdt.css') }}">
-</head>
-<body>
+    <head>
+        <title>Cadastramento</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='cdt.css') }}">
+    </head>
+    <body>
+        <img src="https://i.ibb.co/G95jC4s/logo.jpg">
         <header id="butoes">
                 <span>
                 {% if login: %}
@@ -32,7 +34,18 @@
                 {% endif %}
                 </span>
             </header> 
-    <class id="cadastro">
+            <div class="bar">
+                    <ul>
+                        <li><a href="/">Óleos Essenciais</a></li>
+                        <li><a href="/">Whey Protein</a></li>
+                        <li><a href="/">Vitaminas</a></li>
+                        <li><a href="/">Proteínas</a></li>
+                        <li><a href="/">Hipercalóricos</a></li>
+                        <li><a href="/">Termogênicos</a></li>
+                        <li><a href="/">Pré-treino</a></li>
+                    </ul>
+                </div>
+    <class id="cdt">
         <form action="/cadastro" method="POST" id="form1">
             <h3>Nome</h3>
             <input type="text" name="nome"><br><BR>
@@ -41,6 +54,16 @@
             <h3>Email</h3>
             <input type="string" name="email"><br><BR>
         </form><BR>
+        {% with flashes = get_flashed_messages() %}
+            {% if flashes: %}
+                <div class="flashdiv">
+                    {% for x in flashes:%}
+                        <li>{{ x }}</li>
+                    {% endfor %}
+                </div>
+                <br>
+            {% endif %}
+        {% endwith %}
         <button type="submit" form="form1" value="cadastrar" id="bt6">Cadastrar</button>
     </class>
 </body>

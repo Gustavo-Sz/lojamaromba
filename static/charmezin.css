@@ -5,43 +5,89 @@ body {
 
 #butoes {
 
-    background: #393939;
+    background: #5f3a97;
     position: fixed;
     left: -0.6%;
-    top: -0.2cm;
+    top: -0.1cm;
     font-family: "Roboto", Helvetica, Arial, sans-serif;
     font-weight: 5px;
     font-size: 9px;
-    height: 50px;
+    height: 70px;
     width: 101.2%;
     text-transform: uppercase ;
 }
+ #bt2{
+   position:relative;
+   left:87.5%;
+ }
 
-#btn1 {
+ #bt1{
+   position:relative;
+   left:88%;
+ }
+
+#bt2, #bt1 {
 
     position: relative;
-    left: 88%;
-    top: 20%;
+    top: 35%;
     height: 25px;
+}
+
+#bt2:hover,#bt1:hover {
+  background-color:#e48b71;
 }
 
 button {
-
-    border: 2px solid #ff734a;
-    background-color: #ff734a;
-    border-radius: 50px;
+    
+    border: 3px solid transparent;
+    background-color: #ae79fd;
+    border-radius: 4px;
 }
 
-#btn2 {
 
-    position: relative;
-    left: 87.6%;
-    top: 20%;
-    height: 25px;
-}
 
 /* #bt2 {
     border: 2px solid rgb(108, 108, 108);
     background-color: rgb(108, 108, 108);
     border-radius: 50px;
 } */
+
+ul {
+    position:fixed;
+    height:30;
+    width:101%;
+    top:56;
+    left:-18;
+    list-style-type: none;
+    margin: 10;
+    padding: 0 0 0 0px;
+    overflow: hidden;
+    background-color: #7949c1;
+  }
+  
+  li {
+    float: left;
+    position:relative;
+    left:20%;
+  }
+  
+  li a {
+    display: block;
+    color: #ff734a;
+    text-align: center;
+    padding: 4px 20px;
+    text-decoration: none;
+  }
+
+  li a:hover {
+    background-color:#8484848c;
+    
+  }
+
+img {
+    position:fixed;
+    z-index: 1;
+    top:0.5%;
+    width:219px;
+    height:58;
+}
