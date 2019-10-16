@@ -25,13 +25,17 @@ def cadastrar():
             cursor = db.cursor()
             cursor.execute("""SELECT email FROM usuarios""")
             emailsdb = cursor.fetchall()
-            db.close()
+            
             if email in emailsdb:
                 flash("Email já cadastrado !")
             else:
                 global usuario
                 usuario = User(nome, email, senha)
+                dados = [usuario.nome, usuario.email, usuario.senha]
+                cursor.execute("INSERT INTO usuarios VALUES (?,?,?)", dados)
+                db.commit()
                 session['logado'] = True
+                db.close()
                 return redirect(url_for("home"))
         else:
             flash("Preencha todos os campos")
@@ -41,13 +45,18 @@ def cadastrar():
 @app.route('/entrar', methods=['GET', 'POST'])
 def logar():
     if request.method == "POST":
-        email = request.form['email']
-        senha = request.form['senha']
+        email = str(request.form['email'])
+        senha = str(request.form['senha'])
         if email is not "" and senha is not "":
             db = sqlite3.connect(r"{}\db.db".format(os.getcwd()))
             cursor = db.cursor()
-            cursor.execute("""SELECT senha FROM usuarios WHERE email = '{}'""".format(email))
+            cursor.execute("""SELECT senha, nome FROM usuarios WHERE email = '{}'""".format(email))
             senhadb = cursor.fetchall()
+            senhadb = senhadb[0]
+            nomedb = senhadb[1]
+
+            nomedb = str(nomedb[0])
+            senhadb = str(senhadb[0])
             db.close()
 
             if (email == "admin" and senha == "admin"):
@@ -55,9 +64,11 @@ def logar():
                 session['logado'] = True
                 return redirect(url_for('home'))
             if senhadb:
+                print(senhadb)
+                print(senha)
                 if senha in senhadb:
                     global usuario
-                    usuario = User(nome, email, senha)
+                    usuario = User(nomedb, email, senha)
                     session['logado'] = True
                     return redirect(url_for('home'))
                 else:
