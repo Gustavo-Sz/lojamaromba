@@ -8,49 +8,49 @@
     </head>
         <body>
             <div class="TOPO">
-            <img id="img1" src="https://i.ibb.co/G95jC4s/logo.jpg">
-            <header id="butoes">
-                <span>
-                {% if login: %}
-                    {% if admin: %}
-                        <a href="{{url_for('editarCatalogo')}}">
-                            <button id="bt5">Editar Catálogo</button>
-                        </a>
-                    {% endif %}
-                    <a href="{{url_for('sair')}}">
-                        <button id="bt6">Sair</button>
+                <img id="img1" src="https://i.ibb.co/G95jC4s/logo.jpg">
+                <header id="butoes">
+                    <span>
+                    {% if login: %}
+                        {% if admin: %}
+                            <a href="{{url_for('editarCatalogo')}}">
+                                <button id="bt5">Editar Catálogo</button>
+                            </a>
+                        {% endif %}
+                        <a href="{{url_for('sair')}}">
+                            <button id="bt6">Sair</button>
 
-                    <a href="{{url_for('carrinho')}}">
-                        <button id="bt4"><img id="img2" src="https://i.ibb.co/Qc5HNGJ/carrinho.png"></button>
-                    </a>
-                    <a href="{{url_for('minhaConta')}}">
-                        <button id="bt3">Minha Conta</button>
-                    </a>
-                {% else: %}
-                    <class id="btn2">
-                        <a href="{{url_for('logar')}}" class="bt2" >
-                            <button id="bt2">Entrar</button>
+                        <a href="{{url_for('carrinho')}}">
+                            <button id="bt4"><img id="img2" src="https://i.ibb.co/Qc5HNGJ/carrinho.png"></button>
                         </a>
-                    </class>
-                    <class id="btn1">
-                        <a href="{{url_for('cadastrar')}}" class="bt1">
-                            <button id="bt1">Cadastre-se</button>
+                        <a href="{{url_for('minhaConta')}}">
+                            <button id="bt3">Minha Conta</button>
                         </a>
-                    </class>
-                {% endif %}
-                </span>
-            </header> 
-            <div class="bar">
-                <ul>
-                    <li><a href="/">Óleos Essenciais</a></li>
-                    <li><a href="/">Whey Protein</a></li>
-                    <li><a href="/">Vitaminas</a></li>
-                    <li><a href="/">Proteínas</a></li>
-                    <li><a href="/">Hipercalóricos</a></li>
-                    <li><a href="/">Termogênicos</a></li>
-                    <li><a href="/">Pré-treino</a></li>
-                </ul>
-             </div>
+                    {% else: %}
+                        <class id="btn2">
+                            <a href="{{url_for('logar')}}" class="bt2" >
+                                <button id="bt2">Entrar</button>
+                            </a>
+                        </class>
+                        <class id="btn1">
+                            <a href="{{url_for('cadastrar')}}" class="bt1">
+                                <button id="bt1">Cadastre-se</button>
+                            </a>
+                        </class>
+                    {% endif %}
+                    </span>
+                </header> 
+                <div class="bar">
+                    <ul>
+                        <li><a href="/">Óleos Essenciais</a></li>
+                        <li><a href="/">Whey Protein</a></li>
+                        <li><a href="/">Vitaminas</a></li>
+                        <li><a href="/">Proteínas</a></li>
+                        <li><a href="/">Hipercalóricos</a></li>
+                        <li><a href="/">Termogênicos</a></li>
+                        <li><a href="/">Pré-treino</a></li>
+                    </ul>
+                </div>
             </div>
 
             <!-- <div class="home-display">

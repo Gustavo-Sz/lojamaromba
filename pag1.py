@@ -47,26 +47,24 @@ def logar():
     if request.method == "POST":
         email = str(request.form['email'])
         senha = str(request.form['senha'])
+      
         if email is not "" and senha is not "":
-            db = sqlite3.connect(r"{}\db.db".format(os.getcwd()))
-            cursor = db.cursor()
-            cursor.execute("""SELECT senha, nome FROM usuarios WHERE email = '{}'""".format(email))
-            senhadb = cursor.fetchall()
-            
-
             if (email == "admin" and senha == "admin"):
                 session['admin'] = True
                 session['logado'] = True
                 return redirect(url_for('home'))
             else:
-                senhadb = senhadb[0]
-                nomedb = senhadb[1]
-
-                nomedb = str(nomedb[0])
-                senhadb = str(senhadb[0])
-                db.close()
+                db = sqlite3.connect(r"{}\db.db".format(os.getcwd()))
+                cursor = db.cursor()
+                cursor.execute("""SELECT senha, nome FROM usuarios WHERE email = '{}'""".format(email))
+                dadosdb = cursor.fetchall()
+                dadosdb = dadosdb[0]
+                if dadosdb:
+                    print(dadosdb)
+                    senhadb = str(dadosdb[0])
+                    nomedb = str(dadosdb[1])
+                    db.close()
             
-                if senhadb:
                     if senha in senhadb:
                         global usuario
                         usuario = User(nomedb, email, senha)
