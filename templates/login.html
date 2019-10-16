@@ -1,14 +1,12 @@
 <!DOCTYPE html5>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='charmezin.css')}}">
-        <title>
-            Bem-Vindo meu esforçado !
-        </title>
+        <title>Cadastramento</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='cdt.css') }}">
     </head>
-        <body>
-            <img src="https://i.ibb.co/G95jC4s/logo.jpg">
-            <header id="butoes">
+    <body>
+        <img src="https://i.ibb.co/G95jC4s/logo.jpg">
+        <header id="butoes">
                 <span>
                 {% if login: %}
                     {% if admin: %}
@@ -24,12 +22,12 @@
                     </a>
                 {% else: %}
                     <class id="btn2">
-                        <a href="{{url_for('logar')}}" class="bt2" >
+                        <a href="{{url_for('logar')}}">
                             <button id="bt2">Entrar</button>
                         </a>
                     </class>
                     <class id="btn1">
-                        <a href="{{url_for('cadastrar')}}" class="bt1">
+                        <a href="{{url_for('cadastrar')}}">
                             <button id="bt1">Cadastre-se</button>
                         </a>
                     </class>
@@ -47,5 +45,24 @@
                         <li><a href="/">Pré-treino</a></li>
                     </ul>
                 </div>
-        </body>
+    <class id="cdt">
+        <form action="/cadastro" method="POST" id="form1">
+            <h3>Email</h3>
+            <input type="string" name="email"><br><BR>
+            <h3>Senha</h3>
+            <input type="password" name="senha"><br><BR>
+        </form><BR>
+            {% with flashes = get_flashed_messages() %}
+            {% if flashes: %}
+                <div class="flashdiv">
+                    {% for x in flashes:%}
+                        <li>{{ x }}</li>
+                    {% endfor %}
+                </div>
+                <br>
+            {% endif %}
+        {% endwith %}
+        <button type="submit" form="form1" value="cadastrar" id="bt6">Entrar</button>
+    </class>
+</body>
 </html>
