@@ -99,12 +99,12 @@ ul {
     display: block;
     color: #ff734a;
     text-align: center;
-    padding: 4px 20px;
+    padding: 6px 20px;
     text-decoration: none;
   }
 
   li a:hover {
-    background-color:#8484848c;
+    background-color:#b088ebc7;
     
   }
 

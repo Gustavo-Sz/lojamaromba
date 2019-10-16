@@ -20,7 +20,7 @@ def cadastrar():
         email = request.form['email']
         senha = request.form['senha']
 
-        if nome is not "" and email is not "" and senha is not"":
+        if nome is not "" and email is not "" and senha is not "":
             db = sqlite3.connect(r"{}\db.db".format(os.getcwd()))
             cursor = db.cursor()
             cursor.execute("""SELECT email FROM usuarios""")
@@ -52,29 +52,30 @@ def logar():
             cursor = db.cursor()
             cursor.execute("""SELECT senha, nome FROM usuarios WHERE email = '{}'""".format(email))
             senhadb = cursor.fetchall()
-            senhadb = senhadb[0]
-            nomedb = senhadb[1]
-
-            nomedb = str(nomedb[0])
-            senhadb = str(senhadb[0])
-            db.close()
+            
 
             if (email == "admin" and senha == "admin"):
                 session['admin'] = True
                 session['logado'] = True
                 return redirect(url_for('home'))
-            if senhadb:
-                print(senhadb)
-                print(senha)
-                if senha in senhadb:
-                    global usuario
-                    usuario = User(nomedb, email, senha)
-                    session['logado'] = True
-                    return redirect(url_for('home'))
-                else:
-                    flash("Senha errada !")
             else:
-                flash("Email não cadastrado !")
+                senhadb = senhadb[0]
+                nomedb = senhadb[1]
+
+                nomedb = str(nomedb[0])
+                senhadb = str(senhadb[0])
+                db.close()
+            
+                if senhadb:
+                    if senha in senhadb:
+                        global usuario
+                        usuario = User(nomedb, email, senha)
+                        session['logado'] = True
+                        return redirect(url_for('home'))
+                    else:
+                        flash("Senha errada !")
+                else:
+                    flash("Email não cadastrado !")
         else:
             flash("Preencha todos os campos !")
     return render_template("login.html", novos =  [[],[],[]] , promo = ["nome1", "nome2", "nome3"])
@@ -105,6 +106,10 @@ def carrinho():
 def minhaConta():
     pass
 
+@app.route('/logout', methods=['GET', 'POST'])
+def sair():
+    session['logado'] = False
+    return redirect(url_for('home'))
 
 webbrowser.open('http:\\localhost:5000', new=1)
 app.run(debug=True)

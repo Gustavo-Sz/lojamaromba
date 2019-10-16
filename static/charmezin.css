@@ -42,13 +42,22 @@ body {
   width:40px;
  }
  
+  
  #bt5{
   position:absolute;
   top:25%;
-  left:80.5%;
+  left:76%;
   height:40px;
   width:110px;
  }
+
+#bt6{
+  position: relative;
+  top:25%;
+  left:84.2%;
+  height: 40px;
+  width: 50px
+}
  
  #bt2, #bt1 {
  
@@ -57,7 +66,7 @@ body {
      height: 25px;
  }
 
-#bt2:hover,#bt1:hover,#bt3:hover,#bt4:hover,#bt5:hover {
+#bt2:hover,#bt1:hover,#bt3:hover,#bt4:hover,#bt5:hover, #bt6:hover {
   background-color:#e48b71;
 }
 
@@ -99,12 +108,12 @@ ul {
     display: block;
     color: #ff734a;
     text-align: center;
-    padding: 4px 20px;
+    padding: 6px 20px;
     text-decoration: none;
   }
 
   li a:hover {
-    background-color:#8484848c;
+    background-color:#b088ebc7;
     
   }
 
