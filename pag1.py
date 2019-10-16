@@ -95,13 +95,16 @@ def editarCatalogo():
 
     return render_template("editar_catalogo.html")
 
+
 @app.route('/carrinho', methods=['GET', 'POST'])
 def carrinho():
     pass
 
+
 @app.route('/conta', methods=['GET', 'POST'])
 def minhaConta():
     pass
+
 
 webbrowser.open('http:\\localhost:5000', new=1)
 app.run(debug=True)
