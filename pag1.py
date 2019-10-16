@@ -20,7 +20,7 @@ def cadastrar():
         email = request.form['email']
         senha = request.form['senha']
 
-        if nome == None or email == None or senha == None:
+        if nome is not "" or email is not "" or senha is not"":
             db = sqlite3.connect(r"{}\db.db".format(os.getcwd()))
             cursor = db.cursor()
             cursor.execute("""SELECT email FROM usuarios""")
@@ -30,7 +30,7 @@ def cadastrar():
                 flash("Email já cadastrado !")
             else:
                 global usuario
-                usuario = user(nome, email, senha)
+                usuario = User(nome, email, senha)
                 session['logado'] = True
                 return redirect(url_for("home"))
         else:
@@ -43,26 +43,28 @@ def logar():
     if request.method == "POST":
         email = request.form['email']
         senha = request.form['senha']
+        if email is not "" or senha is not "":
+            db = sqlite3.connect(r"{}\db.db".format(os.getcwd()))
+            cursor = db.cursor()
+            cursor.execute("""SELECT senha FROM usuarios WHERE email = '{}'""".format(email))
+            senhadb = cursor.fetchall()
+            db.close()
 
-        db = sqlite3.connect(r"{}\db.db".format(os.getcwd()))
-        cursor = db.cursor()
-        cursor.execute("""SELECT senha FROM usuarios WHERE email = '{}'""".format(email))
-        senhadb = cursor.fetchall()
-        db.close()
-
-        if (email == "admin" and senha == "admin"):
-            session['admin'] = True
-            return redirect(url_for('home'))
-        if senhadb:
-            if senha in senhadb:
-                global usuario
-                usuario = user(nome, email, senha)
-                session['logado'] = True
+            if (email == "admin" and senha == "admin"):
+                session['admin'] = True
                 return redirect(url_for('home'))
+            if senhadb:
+                if senha in senhadb:
+                    global usuario
+                    usuario = User(nome, email, senha)
+                    session['logado'] = True
+                    return redirect(url_for('home'))
+                else:
+                    flash("Senha errada !")
             else:
-                flash("Senha errada !")
-    else:
-        flash("Email não cadastrado !")
+                flash("Email não cadastrado !")
+        else:
+            flash("Preencha todos os campos !")
     return render_template("login.html")
 
 
