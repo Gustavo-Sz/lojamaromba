@@ -8,7 +8,7 @@
     </head>
         <body>
             <div class="TOPO">
-                <img id="img1" src="https://i.ibb.co/G95jC4s/logo.jpg">
+                <img id="img1" src="{{url_for('static', filename='logo.jpg')}}">
                 <header id="butoes">
                     <span>
                     {% if login: %}
@@ -21,7 +21,7 @@
                             <button id="bt6">Sair</button>
 
                         <a href="{{url_for('carrinho')}}">
-                            <button id="bt4"><img id="img2" src="https://i.ibb.co/Qc5HNGJ/carrinho.png"></button>
+                            <button id="bt4"><img id="img2" src="{{url_for('static', filename='carrinho.png')}}"></button>
                         </a>
                         <a href="{{url_for('minhaConta')}}">
                             <button id="bt3">Minha Conta</button>

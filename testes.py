@@ -1,10 +1,11 @@
-import sqlite3, os
-email = str(input("Email:"))
-db = sqlite3.connect(r"{}\db.db".format(os.getcwd()))
-cursor = db.cursor()
-cursor.execute("""SELECT senha, nome FROM usuarios WHERE email = '{}'""".format(email))
-senhadb = cursor.fetchall()
-print(senhadb)
-print(senhadb[0])
-print(senhadb[0][1])
-print(senhadb[0][0])
+from flask import Flask, render_template, url_for
+import webbrowser
+
+app = Flask(__name__)
+
+@app.route("/")
+def inicial():
+    return render_template("teste.html")
+
+webbrowser.open('http:\\localhost:5000')
+app.run(debug=True)
