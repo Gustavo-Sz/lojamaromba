@@ -13,9 +13,7 @@ def home():
 
     db = banco_de_dados()
     itens_novos = db.buscar_itens_novos()
-    print(itens_novos)
     itens_promo = db.buscar_promos()
-    print(itens_promo)
     for x in range(len(itens_promo)):
         itens_promo[x][4] = str(url_for('static', filename=itens_promo[x][4]))
     for x in range(len(itens_novos)):
