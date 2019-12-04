@@ -45,7 +45,8 @@ class banco_de_dados():
             db.close()
             return False
 
-    def add_item(self, codigo, nome, preco, arq_imagem):
+    def add_item(self, codigo, nome, preco, categoria, arq_imagem):
+
 
         db = self.__conectardb()
         cur = db.cursor()

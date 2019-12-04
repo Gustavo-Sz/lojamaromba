@@ -41,20 +41,19 @@
     
                             <li><button class="botao-categorias" name="botao-categorias" type="submit" value="TERMOGENICOS">Termogênicos</button></li>
     
-                            <li><button class="botao-categorias" name="botao-categorias" type="submit" value="PRETEINO">Pré-treino</button></li>
+                            <li><button class="botao-categorias" name="botao-categorias" type="submit" value="PRETEINOS">Pré-treino</button></li>
                         </ul>
                     </form>
         </div>
         <div class="painel-principal">
             <h1>{{categ}}</h1>
             <div class="itemsplano">
-                {% for x in categ: %}
-                    <div class="itemcard">
+                {% for x in cat: %}
+                <div class="itemcard">
                         <div class="nome">{{x[1]}}</div>
-                        <div class="codigo">x[0]</div>
-                        <img src="{{url_for('static', filename='{{x[3]}}')}}" alt="">
+                        <div class="codigo">{{x[0]}}</div>
+                        <img src="{{x[4]}}" alt="">
                         <div class="preco">R$ {{x[2]}}</div>
-                        <div class="add-carrinho">+</div>
                     </div>
                 {% endfor%}
             </div>
