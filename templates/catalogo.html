@@ -51,8 +51,10 @@
                 {% for x in cat: %}
                 <div class="itemcard">
                         <div class="nome">{{x[1]}}</div>
+                        {%if admin: %}
                         <div class="codigo">{{x[0]}}</div>
-                        <img src="{{x[4]}}" alt="">
+                        {% endif %}
+                        <img src="{{x[3]}}" alt="">
                         <div class="preco">R$ {{x[2]}}</div>
                     </div>
                 {% endfor%}

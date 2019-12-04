@@ -74,8 +74,10 @@
                      <!-- novos_itens = [codigo, nome, preco, img] -->
                     <div class="itemcard">
                         <div class="nome">{{x[1]}}</div>
-                        <div class="codigo">x[0]</div>
-                        <img src="{{url_for('static', filename='{{x[3]}}')}}" alt="">
+                        {%if admin: %}
+                        <div class="codigo">{{x[0]}}</div>
+                        {% endif %}
+                        <img src="{{x[3]}}" alt="">
                         <div class="preco">R$ {{x[2]}}</div>
                         <div class="add-carrinho">+</div>
                     </div>

@@ -295,9 +295,13 @@ font-size:600%;
 }
 
 .itemcard{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
   margin: 2 5 2 10;
   background-color:#ffffff;
-  width:13vh;
+  width:fit-content;
   font-family:monospace;
   padding:10 30 10 30;
   border-radius:4px;
@@ -344,8 +348,6 @@ font-size:600%;
   width:fit-content;
   height:fit-content;
   color:black;
-  font-family:sans-serif;
-  font-weight:700;
-  position:relative;
-  left:10%
+  font-size:2.6vh;
+  font-weight:600;
 }
