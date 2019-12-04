@@ -4,7 +4,7 @@ import sqlite3, os, datetime
 
 
 def arq_promocao(modo):
-    return open("promos.txt", str(modo))
+    return  wopen("promos.txt", str(modo))
 
 
 def data_atual():
