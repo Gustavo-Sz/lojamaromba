@@ -189,6 +189,7 @@ input:focus{
 .itemsplano{
   display:flex;
   flex-direction:row;
+  flex-wrap: wrap;
   justify-content:left;
   margin-bottom:4%;
   border-top: 2px solid #5f3a97;

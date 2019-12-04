@@ -152,7 +152,7 @@ class banco_de_dados():
         db = self.__conectardb()
         cur = db.cursor()
         cur.execute("""SELECT codigo, nome, preço, imagem
-        FROM ITENS
+        FROM itens
         WHERE data > %i
         ORDER BY data asc;
         """ % (i))

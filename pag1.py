@@ -19,7 +19,7 @@ def home():
     for x in range(len(itens_promo)):
         itens_promo[x][4] = str(url_for('static', filename=itens_promo[x][4]))
     for x in range(len(itens_novos)):
-        itens_novos[x] = [itens_novos[x][0],itens_novos[x][1],itens_novos[x][2],str(url_for('static', filename=itens_novos[x][3]))]
+        itens_novos[x] = [itens_novos[x][0], itens_novos[x][1], itens_novos[x][2], str(url_for('static', filename=itens_novos[x][3]))]
 
     return render_template('home.html', login=session.get('logado'), admin =session.get('admin'), novos_itens = itens_novos, promo_itens = itens_promo)
 
