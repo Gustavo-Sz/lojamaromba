@@ -2,6 +2,7 @@
 
 import sqlite3, os, datetime
 
+
 def arq_promocao(modo):
     return open("promos.txt", str(modo))
 
@@ -44,7 +45,8 @@ class banco_de_dados():
             db.close()
             return False
 
-    def add_item(self, codigo, nome, preco, arq_imagem):
+    def add_item(self, codigo, nome, preco, categoria, arq_imagem):
+
 
         db = self.__conectardb()
         cur = db.cursor()
@@ -192,16 +194,17 @@ class banco_de_dados():
 
     def cria_codigo(self,categ,qtd_itens):
         dic = {
-            'VITAMINAS': ,
-            'WHEYPROTEIN': ,
-            'PROTEINAS': ,
-            'OLEOSESSENCIAIS': ,
-            'HIPERCALORICOS': ,
-            'TERMOGENICOS': ,
-            'PRETREINOS': ,
+            'VITAMINAS': 100,
+            'WHEYPROTEIN': 200,
+            'PROTEINAS': 300,
+            'OLEOSESSENCIAIS': 400,
+            'HIPERCALORICOS': 500,
+            'TERMOGENICOS': 600,
+            'PRETREINOS': 700,
         } 
         
-        
+        codigo_produto = str(dic[categ]) + str(qtd_itens)
+        return int(codigo_produto)
 
 
 
