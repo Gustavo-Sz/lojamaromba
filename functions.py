@@ -158,6 +158,7 @@ class banco_de_dados():
         """ % (i))
         itens = cur.fetchall()
         db.close()
+        print(itens)
         # itens = [codigo, nome, preco, imagem]
         return itens
 
