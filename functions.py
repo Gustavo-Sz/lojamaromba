@@ -2,6 +2,7 @@
 
 import sqlite3, os, datetime
 
+
 def arq_promocao(modo):
     return open("promos.txt", str(modo))
 
