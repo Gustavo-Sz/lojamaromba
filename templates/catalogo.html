@@ -8,6 +8,55 @@
         </title>
     </head>
     <body>
-        {{cat}}
+        <div class="bar-box">
+                <a href="{{url_for('home')}}"><img id="img1" src="{{url_for('static', filename='logo.jpg')}}"></a>
+                    <div class="headerbuttons">
+                        {% if login: %}
+                            {% if admin: %}
+                                <a href="{{url_for('editarCatalogo')}}"class="buttons" id="bt5">Editar Catálogo</a>
+                            {% endif %}
+                            <a href="{{url_for('carrinho')}}"class="buttons" id="bt4"><img id="img2" src="{{url_for('static', filename='carrinho.png')}}"></a>
+                            <a href="{{url_for('minhaConta')}}" class="buttons" id="bt3">Minha Conta</a>
+                            <a href="{{url_for('sair')}}" class="buttons" id='bt6'>Sair</a>
+                        {% else: %}
+                            <a href="{{url_for('logar')}}" class="buttons" id="bt2">Entrar</a>
+                            <a href="{{url_for('cadastrar')}}" class="buttons" id="bt1">Cadastre-se</a>
+                        {% endif %}
+                    </div>
+        </div> 
+        <div class="bar">
+                    <form action="/categoria" method="POST">
+                        <ul>
+                            <li>
+                                <button class="botao-categorias" name="botao-categorias" type="submit" value="OLEOSESSENCIAIS">
+                                Óleos Essenciais</button>
+                            </li>
+                            <li><button class="botao-categorias" name="botao-categorias" type="submit" value="WHEYPROTEIN">Whey Protein</button></li>
+    
+                            <li><button class="botao-categorias" name="botao-categorias" type="submit" value="VITAMINAS">Vitaminas</button></li>
+    
+                            <li><button class="botao-categorias" name="botao-categorias" type="submit" value="PROTEINAS">Proteínas</button></li>
+    
+                            <li><button class="botao-categorias" name="botao-categorias" type="submit" value="HIPERCALORICOS">Hipercalóricos</button></li>
+    
+                            <li><button class="botao-categorias" name="botao-categorias" type="submit" value="TERMOGENICOS">Termogênicos</button></li>
+    
+                            <li><button class="botao-categorias" name="botao-categorias" type="submit" value="PRETEINOS">Pré-treino</button></li>
+                        </ul>
+                    </form>
+        </div>
+        <div class="painel-principal">
+            <h1>{{categ}}</h1>
+            <div class="itemsplano">
+                {% for x in cat: %}
+                <div class="itemcard">
+                        <div class="nome">{{x[1]}}</div>
+                        <div class="codigo">{{x[0]}}</div>
+                        <img src="{{x[4]}}" alt="">
+                        <div class="preco">R$ {{x[2]}}</div>
+                    </div>
+                {% endfor%}
+            </div>
+        </div>
     </body>
 </html>

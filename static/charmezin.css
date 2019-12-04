@@ -131,7 +131,7 @@ height:20px;
   z-index:0;
 }
 
-h1{
+.painel-principal h1{
   width:fit-content;
   font-size:35;
   font-weight:100;
@@ -186,7 +186,10 @@ input:focus{
 }
 
 
-.recentesplano{
+.itemsplano{
+  display:flex;
+  flex-direction:row;
+  justify-content:left;
   margin-bottom:4%;
   border-top: 2px solid #5f3a97;
   padding: 20 10 20 10;
@@ -204,13 +207,6 @@ font-size:600%;
 
 } 
 
-.promocoesplano{
-  display:flex;
-  margin-bottom:4%;
-  border-top: 2px solid #5f3a97;
-  padding: 20 10 20 10;
-  height:fit-content;
-}
 
 .addpromobt{
  width:13vh;

@@ -42,14 +42,14 @@
 
                         <li><button class="botao-categorias" name="botao-categorias" type="submit" value="TERMOGENICOS">Termogênicos</button></li>
 
-                        <li><button class="botao-categorias" name="botao-categorias" type="submit" value="PRETEINO">Pré-treino</button></li>
+                        <li><button class="botao-categorias" name="botao-categorias" type="submit" value="PRETEINOS">Pré-treino</button></li>
                     </ul>
                 </form>
             </div>
             <div class="painel-principal">
                 <div class="promocoes">
                     <h1>PROMOÇÕES</h1>
-                    <div class="promocoesplano">
+                    <div class="itemsplano">
                     {% for x in promo_itens %}
                     <!-- promo_itens = [codigo, preco_antigo, nome, preco_novo, img] -->
                     <div class="itemcard">
@@ -69,7 +69,7 @@
                 </div>
                 <div class="recentes">
                     <h1>Novos</h1>
-                    <div class="recentesplano">
+                    <div class="itemsplano">
                     {% for x in novos_itens %}
                      <!-- novos_itens = [codigo, nome, preco, img] -->
                     <div class="itemcard">
