@@ -149,6 +149,8 @@ def catalogo():
     db = banco_de_dados()
     categ = request.form['botao-categorias']
     a = db.listar_categoria(categ)
+    for x in range(len(a)):
+        a[x] = [a[x][0], a[x][1], a[x][2], str(url_for('static', filename=a[x][4]))]
     categ = str(categ).capitalize()
     return render_template('catalogo.html', categ=categ, cat=a, login=session.get('logado'), admin =session.get('admin'))
 
