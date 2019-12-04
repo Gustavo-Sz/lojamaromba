@@ -182,3 +182,29 @@ class banco_de_dados():
         
         return itens
 
+    def contar_itens(self,categ):
+        db = self.__conectardb()
+        cur = db.cursor()
+        cur.execute("""SELECT nome FROM itens where categoria = %s"""%(categ))
+        dblist = cur.fetchall()
+        return len(dblist)
+
+
+    def cria_codigo(self,categ,qtd_itens):
+        dic = {
+            'VITAMINAS': ,
+            'WHEYPROTEIN': ,
+            'PROTEINAS': ,
+            'OLEOSESSENCIAIS': ,
+            'HIPERCALORICOS': ,
+            'TERMOGENICOS': ,
+            'PRETREINOS': ,
+        } 
+        
+        
+
+
+
+
+
+
