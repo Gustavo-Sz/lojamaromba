@@ -1,11 +1,5 @@
-from flask import Flask, render_template, url_for
-import webbrowser
+import datetime
 
-app = Flask(__name__)
+i = str(datetime.datetime.now().strftime("%Y"))+str(datetime.datetime.now().strftime("%m"))+str(datetime.datetime.now().strftime("%d"))
 
-@app.route("/")
-def inicial():
-    return render_template("teste.html")
-
-webbrowser.open('http:\\localhost:5000')
-app.run(debug=True)
+print(int(i)-7)

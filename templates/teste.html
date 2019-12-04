@@ -1,8 +1,34 @@
+<!DOCTYPE html5>
 <html>
     <head>
+        <title>
+            Bem-Vindo meu esforçado !
+        </title>
 
+        <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+
+        <script>
+                function sb(){
+                    $('form1').submit()
+                }
+            </script>
     </head>
-    <body>
-        <img src="{{ url_for('static', filename='img.jpg')}}">
-    </body>
+        <body>
+             
+                <div class="bar">
+                        <ul>
+                            <li><p id="cat" name="Óleos Essenciais">Óleos Essenciais</p></li>
+                            <li><p id="cat" name="Whey Protein">Whey Protein</p></li>
+                            <li><p id="cat" name="Vitaminas">Vitaminas</p></li>
+                            <li><p id="cat" name="Proteínas">Proteínas</p></li>
+                            <li><p id="cat" name="Termogênicos">Termogênicos</p></li>
+                            <li><p id="cat" name="Hipercalóricos">Hipercalóricos</p></li>
+                            <li><p id="cat" name="Pré-treinos">Pré-treinos</p></li>
+                        </ul>
+                    </div>
+            
+        </body>
 </html>
