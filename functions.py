@@ -6,11 +6,14 @@ import sqlite3, os, datetime
 def arq_promocao(modo):
     return  open("promos.txt", str(modo))
 
-
 def data_atual():
     i = str(datetime.datetime.now().strftime("%Y"))+str(datetime.datetime.now().strftime("%m"))+str(datetime.datetime.now().strftime("%d"))
     return i
 
+def lista_de_categorias():
+    print("Entrou na lista_de_categorias")
+    dic = {'VITAMINAS': 100,'WHEYPROTEIN': 200,'PROTEINAS': 300,'OLEOSESSENCIAIS': 400,'HIPERCALORICOS': 500,'TERMOGENICOS': 600,'PRETREINOS': 700} 
+    return dic
 
 class banco_de_dados():
     def __init__(self):
@@ -50,8 +53,10 @@ class banco_de_dados():
 
         db = self.__conectardb()
         cur = db.cursor()
+        print("Conectou ao db na funcao add_item")
         try:
             dataAdd = int(data_atual())
+            print("A data e %s" % (dataAdd))
             cur.execute("""INSERT INTO itens values (?,?,?,?,?,?,?)
             """, (codigo, nome, preco, categoria, arq_imagem, dataAdd, None))
             db.commit()
@@ -67,13 +72,13 @@ class banco_de_dados():
         cur = db.cursor()
 
         try:
-            cur.execute("""DELETE FROM itens codigo = '%s'""" % (codigo))
+            cur.execute("""DELETE FROM itens WHERE codigo = '%s'""" % (codigo))
             db.commit()
             db.close()
-            return True
+            return "Item removido"
         except:
             db.close()
-            return False
+            return "Codigo não existe"
 
     def att_preco(self, codigo, preco_novo):
 
@@ -95,6 +100,7 @@ class banco_de_dados():
 
         db = self.__conectardb()
         cur = db.cursor()
+        print("Conectou ao db na funcao listar_categoria")
         cur.execute("""SELECT * FROM itens where categoria = '%s'
         """ % (categoria))
         itens = cur.fetchall()
@@ -158,7 +164,6 @@ class banco_de_dados():
         """ % (i))
         itens = cur.fetchall()
         db.close()
-        print(itens)
         # itens = [codigo, nome, preco, imagem]
         return itens
 
@@ -185,30 +190,16 @@ class banco_de_dados():
         
         return itens
 
-    def contar_itens(self,categ):
+    def contar_itens(self, categ):
         db = self.__conectardb()
         cur = db.cursor()
-        cur.execute("""SELECT nome FROM itens where categoria = %s"""%(categ))
+        cur.execute("""SELECT nome FROM itens where categoria = '%s'""" % (categ))
         dblist = cur.fetchall()
-        return len(dblist)
+        dblist = len(dblist)
+        return dblist
 
-
-    def cria_codigo(self,categ,qtd_itens):
-        dic = {
-            'VITAMINAS': 100,
-            'WHEYPROTEIN': 200,
-            'PROTEINAS': 300,
-            'OLEOSESSENCIAIS': 400,
-            'HIPERCALORICOS': 500,
-            'TERMOGENICOS': 600,
-            'PRETREINOS': 700,
-        } 
-        
-        codigo_produto = str(dic[categ]) + str(qtd_itens)
+    def cria_codigo(self, categ):
+        list_cat = lista_de_categorias()
+        qtd_itens = self.contar_itens(categ)
+        codigo_produto = str(list_cat[categ]) + str(qtd_itens)
         return int(codigo_produto)
-
-
-
-
-
-

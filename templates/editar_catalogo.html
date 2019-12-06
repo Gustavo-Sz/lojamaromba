@@ -52,15 +52,30 @@
                     <button class="buttons" name="opcao" value="opcao1" type="submit">Adicionar item</button>
                     <button class="buttons" name="opcao" value="opcao2" type="submit">Remover item</button>
                 </form>
+                {% with flashes = get_flashed_messages() %}
+                        {% if flashes: %}
+                            <div class="flashdiv" >
+                                {% for x in flashes:%}
+                                    <li>{{ x }}</li>
+                                {% endfor %}
+                            </div>
+                        <br>
+                        {% endif %}
+                    {% endwith %}
             </div>
         {% elif acao == "opcao1": %}
             <div class="opcao">
                 <tittle>Adicionar produto</tittle>
                 <form action="/editar/additem" method="POST">
                     <input type="text" name="nome" placeholder="Nome">
-
                     <input placeholder="Nome da imagem" name="nome_arq_img" type="text"> 
                     <input type="text" name="preco" placeholder="Preço">
+                    <input list="categs" name="categoria" placeholder="Categoria">
+                    <datalist id="categs">
+                        {% for x in categs: %}
+                            <option value="{{x}}"></option>
+                        {% endfor %}
+                    </datalist>
                     <!--<span><a>Imagem:</a>
                         <label for="imgfile">Selecionar</label><input type="file" name="imagem" id="imgfile">
                     </span>-->
@@ -98,11 +113,19 @@
         {% elif acao == "addpromo": %}
             <div class="opcao">
                 <title>Adicionar promoção</title>
-                <form action="/editar/promos"></form>
+                <form action="/editar/addpromos" method="POST">
+                    <input type="text" name="codigo" placeholder="Codigo">
+                    <input type="text" name="preco_novo">
+                    <button class="buttons" name="opcao" value="add" type="submit">Adicionar</button>
+                </form>
             </div>
         {% elif acao == "rempomo": %}
             <div class="opcao">
                 <title>Remover promoção</title>
+                <form action="editar/promos" method="POST">
+                    <input type="text" name="codigo" placeholder="Código">
+                    <button class="buttons" name="opcao" value="rem" type="submit">Remover</button>
+                </form>
             </div>
         {% endif %}
     </div>

@@ -298,23 +298,26 @@ font-size:600%;
 .itemcard{
   display:flex;
   flex-direction:column;
-  justify-content:center;
+  justify-content:space-around;
   align-items:center;
-  margin: 2 5 2 10;
+  margin: 10 5 5 10;
   background-color:#ffffff;
-  width:fit-content;
+  width:20vh;
+  height:35vh;
   font-family:monospace;
-  padding:10 30 10 30;
+  padding:00 30 10 30;
   border-radius:4px;
 }
-
+.add-carrinho{
+  display:none;
+}
 .itemcard span{
   display:inline;  
 }
 
 .itemcard:hover{
   border: 2px solid #5f3a97;
-  margin:0 3 0 8;
+  margin:8 3 3 8;
   cursor:pointer;
 }
 

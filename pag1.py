@@ -2,23 +2,20 @@ from flask import Flask, render_template, session, flash, redirect, url_for, req
 import webbrowser, sqlite3, os
 from users import User
 from produtos import Produto
-from functions import banco_de_dados
+from functions import banco_de_dados, lista_de_categorias
 
 app = Flask(__name__)
 app.secret_key = os.urandom(12)
 
-
 @app.route("/", methods=['GET', 'POST'])
 def home():
-
     db = banco_de_dados()
     itens_novos = db.buscar_itens_novos()
     itens_promo = db.buscar_promos()
     for x in range(len(itens_promo)):
-        itens_promo[x][4] = str(url_for('static', filename=itens_promo[x][4]))
+        itens_promo[x][4] = "static/imgprodutos/"+str(itens_promo[x][4])
     for x in range(len(itens_novos)):
-        itens_novos[x] = [itens_novos[x][0], itens_novos[x][1], itens_novos[x][2], str(url_for('static', filename=itens_novos[x][3]))]
-    print(itens_novos)
+        itens_novos[x] = [itens_novos[x][0], itens_novos[x][1], itens_novos[x][2], "static/imgprodutos/"+str(itens_novos[x][3])]
     return render_template('home.html', login=session.get('logado'), admin =session.get('admin'), novos_itens = itens_novos, promo_itens = itens_promo)
 
 
@@ -79,7 +76,7 @@ def logar():
     return render_template("login.html", login=session.get('logado'), admin =session.get('admin'))
 
 
-@app.route('/promos', methods=['GET', 'POST'])
+@app.route('editar/addpromos', methods=['GET', 'POST'])
 def add_promo():
     if session['admin']:
         if request.method == 'GET':
@@ -89,7 +86,7 @@ def add_promo():
             preco_novo = request.form['preco_novo']
             db = banco_de_dados()
             status = db.add_promocao(codigo, preco_novo)
-            flash("%s" % (status))
+            flash(status)
             return render_template("editar_catalogo.html", acao ="addpromo", login=session.get('logado'), admin =session.get('admin'))
 
 
@@ -102,9 +99,11 @@ def editarCatalogo():
         elif request.method == 'POST':
             # OPCAO 1 - Add item; OPCAO 2 - Remov item.
             if request.form['opcao'] == "opcao1":
-                return render_template("editar_catalogo.html", acao="opcao1",login=session.get('logado'), admin =session.get('admin'))
+                db = banco_de_dados()
+                return render_template("editar_catalogo.html", acao="opcao1",login=session.get('logado'), admin =session.get('admin'), categs = lista_de_categorias().keys())
             elif request.form['opcao'] == "opcao2":
                 return render_template("editar_catalogo.html", acao="opcao2",login=session.get('logado'), admin =session.get('admin'))
+
 
 @app.route('/editar/additem', methods=['GET', 'POST'])
 def additem():
@@ -112,20 +111,42 @@ def additem():
         nome = request.form['nome']
         arq_img = request.form['nome_arq_img']
         preco = request.form['preco']
+        categoria = request.form['categoria']
+
+        print(nome, arq_img, preco, categoria)
 
         db = banco_de_dados()
 
-        if nome == "" or arq_img == "" or preco == "":
+        if nome == "" or arq_img == "" or preco == "" or categoria == "":
             flash("Preencha todos os campos !")
             return redirect(url_for('editarCatalogo'))
         else:
             try:
-                db.add_item(db.cria_codigo(), nome, preco, arq_img)
+                print("entrou no try do additem, vai pra a criacao do codigo")
+                codigo = db.cria_codigo(categoria)
+                print("O codigo e %s" % (codigo))
+                db.add_item(codigo, nome, preco, categoria, arq_img)
                 flash('Item adicionado !')
                 return redirect(url_for('editarCatalogo'))
             except:
                 flash('Algo deu errado !')
                 return redirect(url_for('editarCatalogo'))
+
+
+@app.route('/editar/remitem', methods=['GET', 'POST'])
+def remitem():
+    if session['admin']:
+        codigo = request.form['codigo']
+
+        if codigo == "":
+            flash('Preencha o campo !')
+            return redirect(url_for('editarCatalogo'))
+        else:
+            db = banco_de_dados()
+            status = db.del_item(codigo)
+            flash(status)
+            return redirect(url_for('editarCatalogo'))
+
 
 @app.route('/carrinho', methods=['GET', 'POST'])
 def carrinho():
@@ -150,7 +171,7 @@ def catalogo():
     categ = request.form['botao-categorias']
     a = db.listar_categoria(categ)
     for x in range(len(a)):
-        a[x] = [a[x][0], a[x][1], a[x][2], str(url_for('static', filename=a[x][4]))]
+        a[x] = [a[x][0], a[x][1], a[x][2], "static/imgprodutos/"+str(a[x][4])]
     categ = str(categ).capitalize()
     return render_template('catalogo.html', categ=categ, cat=a, login=session.get('logado'), admin =session.get('admin'))
 
