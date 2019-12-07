@@ -6,6 +6,14 @@ import sqlite3, os, datetime
 def arq_promocao(modo):
     return  open("promos.txt", str(modo))
 
+def arq_descricao(codigo):
+    try:
+        arq = open(str(codigo)+".txt", 'r')
+        descricao = arq.readlines()
+        return descricao
+    except FileNotFoundError:
+        return "Arquivo de descrição não encontrado"
+
 def data_atual():
     i = str(datetime.datetime.now().strftime("%Y"))+str(datetime.datetime.now().strftime("%m"))+str(datetime.datetime.now().strftime("%d"))
     return i
@@ -85,10 +93,9 @@ class banco_de_dados():
         db = self.__conectardb()
         cur = db.cursor()
         try:
-            cur.execute("""UPDATE itens
-                                SET preco = '%s'
-                                WHERE codigo = '%s'
-            """ % (preco_novo, codigo))
+            sql = "UPDATE itens SET preco = ? WHERE codigo = ?"
+            values = (preco_novo, codigo)
+            cur.execute(sql, (preco_novo, codigo))
             db.commit()
             db.close()
             return True
@@ -104,6 +111,7 @@ class banco_de_dados():
         cur.execute("""SELECT * FROM itens where categoria = '%s'
         """ % (categoria))
         itens = cur.fetchall()
+        db.close()
         return itens
 
     def att_senha(self, email, senha_nova):
@@ -134,30 +142,40 @@ class banco_de_dados():
             return "O produto já está nesse preço"
 
         db.close()
-        self.att_preco(codigo_item, preco_novo)
-        arq = arq_promocao("a")
-        arq.write("%s:%s\n" % (codigo_item, preco_antigo))
-        arq.close()
-        return "Promoção adicionada"
+        status = self.att_preco(codigo_item, preco_novo) 
+        if not status:
+            return "Não foi possível alterar o preço"
+        else:
+            arq = arq_promocao("a")
+            arq.write("%s:%s\n" % (codigo_item, preco_antigo))
+            arq.close()
+            return "Promoção adicionada"
 
     def rem_promocao(self, codigo_item):
 
         arq = arq_promocao("r")
         itens = arq.readlines()
         arq.close()
-
-        arq = arq_promocao("w")
+        coditens = []
         for line in itens:
-            if line.strip("\n").split(":")[0] != str(codigo_item):
-                arq.write(line)
-        arq.close()
+                coditens.append(line.strip("\n").split(":")[0])
+
+        if codigo_item in coditens:
+            arq = arq_promocao("w")
+            for line in itens:
+                if line.strip("\n").split(":")[0] != str(codigo_item):
+                    arq.write(line)
+            arq.close()
+            return "Promoção removida !"
+        else:
+            return "Não existe promoção para esse código"
 
     def buscar_itens_novos(self):
 
         i = int(data_atual())-7
         db = self.__conectardb()
         cur = db.cursor()
-        cur.execute("""SELECT codigo, nome, preço, imagem
+        cur.execute("""SELECT codigo, nome, preco, imagem
         FROM itens
         WHERE data > %i
         ORDER BY data asc;
@@ -180,15 +198,32 @@ class banco_de_dados():
 
         for line in range(len(itens)):
             itens[line] = itens[line].strip("\n").split(":")
-            cur.execute("""SELECT nome, preço, imagem FROM itens Where codigo = %i""" % (int(itens[line][0])))
+            cur.execute("""SELECT nome, preco, imagem FROM itens Where codigo = %i""" % (int(itens[line][0])))
             dblist = cur.fetchall()
-            
             dblist = dblist[0]
             for x in dblist:
                 itens[line].append(x)
+                print(itens[line])
             # [codigo, preco_antigo, nome, preco_novo, imagem]
-        
+        db.close()
         return itens
+
+    def buscar_item(self, codigo):
+        db = self.__conectardb()
+        cur = db.cursor()
+        value = (codigo,)
+        cur.execute("SELECT * FROM itens WHERE codigo = ?", value)
+        infos = cur.fetchall()
+        print(infos)
+        if infos == []:
+            return False
+        else:
+            infos = [infos[0][0],infos[0][1],infos[0][2],infos[0][3],infos[0][4],infos[0][5],infos[0][6]]
+            db.close()
+            descricao = arq_descricao(codigo)
+            infos.append(descricao)
+            print(infos)
+            return infos
 
     def contar_itens(self, categ):
         db = self.__conectardb()
@@ -196,6 +231,7 @@ class banco_de_dados():
         cur.execute("""SELECT nome FROM itens where categoria = '%s'""" % (categ))
         dblist = cur.fetchall()
         dblist = len(dblist)
+        db.close()
         return dblist
 
     def cria_codigo(self, categ):

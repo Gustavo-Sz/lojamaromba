@@ -111,6 +111,13 @@ ul {
   height:58;
 }
 
+#img2{
+  z-index: 1;
+  width:20px;
+  height:20px;
+  }
+  
+
 #cdt {
     background-color:#5f3a97;
     border-radius:15px;

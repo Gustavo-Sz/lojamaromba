@@ -51,8 +51,13 @@
                 {% for x in cat: %}
                 <div class="itemcard">
                         <div class="nome">{{x[1]}}</div>
-                        {%if admin: %}
-                        <div class="codigo">{{x[0]}}</div>
+                        {% if admin: %}
+                        <div class="adminview">
+                            <div class="codigo">{{x[0]}}</div>
+                            <form action="/editar/remitem" method="POST">
+                                <button id="removeritem" name="codigo" value="{{x[0]}}" type="submit">X</button>
+                            </form>
+                        </div>
                         {% endif %}
                         <img src="{{x[3]}}" alt="">
                         <div class="preco">R$ {{x[2]}}</div>

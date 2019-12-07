@@ -52,17 +52,29 @@
                     <div class="itemsplano">
                     {% for x in promo_itens %}
                     <!-- promo_itens = [codigo, preco_antigo, nome, preco_novo, img] -->
-                    <div class="itemcard">
-                        <div class="nome">{{x[2]}}</div>
-                        <div class="codigo">{{x[0]}}</div>
-                        <img src="{{x[4]}}" alt="">
-                        <div class="preco_antigo">R$ {{x[1]}}</div>
-                        <div class="preco">R$ {{x[3]}}</div>
-                    </div>
+
+                    <form class='itemsform' action="/item" method="POST">
+                        <button class='itemsbt' name='codigo' value='{{x[0]}}' type='submit'>
+                            <div class="itemcard">
+                                <div class="nome">{{x[2]}}</div>
+                                {% if admin: %}
+                                <div class="adminview">
+                                    <div class="codigo">{{x[0]}}</div>
+                                    <form action="/editar/rempromo" method="POST">
+                                        <button id="removeritem" name="codigo" value="{{x[0]}}" type="submit">X</button>
+                                    </form>
+                                </div>
+                                {% endif %}
+                                <img src="{{x[4]}}" alt="">
+                                <div class="preco_antigo">R$ {{x[1]}}</div>
+                                <div class="preco">R$ {{x[3]}}</div>
+                            </div>
+                        </button>
+                    </form>
                     {% endfor %}
                     {% if admin: %}
                     <div class="addpromobt">
-                        <a href="{{url_for('add_promo')}}">+</a>
+                        <a href="{{url_for('addpromo')}}">+</a>
                     </div>
                     {% endif %}
                 </div>
@@ -72,15 +84,18 @@
                     <div class="itemsplano">
                     {% for x in novos_itens %}
                      <!-- novos_itens = [codigo, nome, preco, img] -->
-                    <div class="itemcard">
-                        <div class="nome">{{x[1]}}</div>
-                        {%if admin: %}
-                        <div class="codigo">{{x[0]}}</div>
-                        {% endif %}
-                        <img src="{{x[3]}}" alt="">
-                        <div class="preco">R$ {{x[2]}}</div>
-                        <div class="add-carrinho">+</div>
-                    </div>
+                    <form class='itemsform' action="/item" method='POST'>
+                        <button class='itemsbt' name='codigo' value='{{x[0]}}' type='submit'>
+                            <div class="itemcard">
+                                <div class="nome">{{x[1]}}</div>
+                                {%if admin: %}
+                                <div class="codigo">{{x[0]}}</div>
+                                {% endif %}
+                                <img src="{{x[3]}}" alt="">
+                                <div class="preco">R$ {{x[2]}}</div>
+                            </div>
+                        </button>
+                    </form>
                     {% endfor %}
                     </div>
                 </div>

@@ -1,6 +1,15 @@
-def lista_de_categorias():
-    print("Entrou na lista_de_categorias")
-    dic = {'VITAMINAS': 100,'WHEYPROTEIN': 200,'PROTEINAS': 300,'OLEOSESSENCIAIS': 400,'HIPERCALORICOS': 500,'TERMOGENICOS': 600,'PRETREINOS': 700,} 
-    return dic
+import os, sqlite3
 
-print(lista_de_categorias())
+db = sqlite3.connect("%s\\db.db" % (os.getcwd()))
+
+cur = db.cursor()
+value = input('Digite um codigo q n existe:')
+value = (str(value),)
+cur.execute("SELECT * FROM itens WHERE codigo = ?", value)
+saida = cur.fetchall()
+print(saida)
+
+if(saida == []):
+    print('Vazia')
+if(saida != []):
+    print("Nao vazia")

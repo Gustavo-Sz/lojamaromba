@@ -51,6 +51,8 @@
                 <form action="/editar" method="POST">
                     <button class="buttons" name="opcao" value="opcao1" type="submit">Adicionar item</button>
                     <button class="buttons" name="opcao" value="opcao2" type="submit">Remover item</button>
+                    <button class="buttons" name="opcao" value="addpromo" type="submit">Adicionar promoção</button>
+                    <button class="buttons" name="opcao" value="rempromo" type="submit">Remover promoção</button>
                 </form>
                 {% with flashes = get_flashed_messages() %}
                         {% if flashes: %}
@@ -112,19 +114,39 @@
             </div>
         {% elif acao == "addpromo": %}
             <div class="opcao">
-                <title>Adicionar promoção</title>
-                <form action="/editar/addpromos" method="POST">
+                <tittle>Adicionar promoção</tittle>
+                <form action="/editar/addpromo" method="POST">
                     <input type="text" name="codigo" placeholder="Codigo">
-                    <input type="text" name="preco_novo">
-                    <button class="buttons" name="opcao" value="add" type="submit">Adicionar</button>
+                    <input type="text" name="preco_novo" placeholder="Preço novo">
+                    <button class="buttons" name="opcao" value="addpromo" type="submit">Adicionar</button>
+                    {% with flashes = get_flashed_messages() %}
+                    {% if flashes: %}
+                        <div class="flashdiv">
+                            {% for x in flashes:%}
+                                <li>{{ x }}</li>
+                            {% endfor %}
+                        </div>
+                    <br>
+                    {% endif %}
+                {% endwith %}
                 </form>
             </div>
-        {% elif acao == "rempomo": %}
+        {% elif acao == "rempromo": %}
             <div class="opcao">
-                <title>Remover promoção</title>
-                <form action="editar/promos" method="POST">
+                <tittle>Remover promoção</tittle>
+                <form action="/editar/rempromo" method="POST">
                     <input type="text" name="codigo" placeholder="Código">
-                    <button class="buttons" name="opcao" value="rem" type="submit">Remover</button>
+                    <button class="buttons" name="opcao" value="rempromo" type="submit">Remover</button>
+                    {% with flashes = get_flashed_messages() %}
+                    {% if flashes: %}
+                        <div class="flashdiv">
+                            {% for x in flashes:%}
+                                <li>{{ x }}</li>
+                            {% endfor %}
+                        </div>
+                    <br>
+                    {% endif %}
+                {% endwith %}
                 </form>
             </div>
         {% endif %}
