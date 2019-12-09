@@ -56,15 +56,13 @@ class banco_de_dados():
             db.close()
             return False
 
-    def add_item(self, codigo, nome, preco, categoria, arq_imagem):
+    def add_item(self, codigo, nome, preco, categoria, arq_imagem, descricao):
 
 
         db = self.__conectardb()
         cur = db.cursor()
-        print("Conectou ao db na funcao add_item")
         try:
             dataAdd = int(data_atual())
-            print("A data e %s" % (dataAdd))
             cur.execute("""INSERT INTO itens values (?,?,?,?,?,?,?)
             """, (codigo, nome, preco, categoria, arq_imagem, dataAdd, None))
             db.commit()

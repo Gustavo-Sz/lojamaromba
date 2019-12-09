@@ -105,22 +105,20 @@ def additem():
             arq_img = request.form['nome_arq_img']
             preco = request.form['preco']
             categoria = request.form['categoria']
+            descricao = request.form['descricao']
 
             db = banco_de_dados()
 
             if nome == "" or arq_img == "" or preco == "" or categoria == "":
                 flash("Preencha todos os campos !")
-                return redirect(url_for('editarCatalogo'))
             else:
                 try:
                     codigo = db.cria_codigo(categoria)
-                    db.add_item(codigo, nome, preco, categoria, arq_img)
+                    db.add_item(codigo, nome, preco, categoria, arq_img, descricao)
                     flash('Item adicionado !')
-                    return redirect(url_for('editarCatalogo'))
                 except:
                     flash('Algo deu errado !')
-                    return redirect(url_for('editarCatalogo'))
-
+            return render_template("editar_catalogo.html",acao="opcao1",login=session.get('logado'), admin =session.get('admin'), categs = lista_de_categorias().keys())
 
 @app.route('/editar/remitem', methods=['GET', 'POST'])
 def remitem():

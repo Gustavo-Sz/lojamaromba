@@ -1,10 +1,11 @@
-<html><head>
+<html>
+    <head>
     <link rel="stylesheet" type="text/css" href="/static/charmezin.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script><link rel="stylesheet" href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" media="all">
     <title>
        LojaMaromba - Editar Catalogo
     </title>
-</head>
+    </head>
 <body>
     <div class="bar-box">
             <a href="{{url_for('home')}}"><img id="img1" src="{{url_for('static', filename='logo.jpg')}}"></a>
@@ -73,6 +74,7 @@
                     <input placeholder="Nome da imagem" name="nome_arq_img" type="text"> 
                     <input type="text" name="preco" placeholder="Preço">
                     <input list="categs" name="categoria" placeholder="Categoria">
+                    <input type="text" name="descricao" placeholder="Descrição do produto">
                     <datalist id="categs">
                         {% for x in categs: %}
                             <option value="{{x}}"></option>
@@ -152,6 +154,5 @@
         {% endif %}
     </div>
     </div>
-
 </body>
 </html>
