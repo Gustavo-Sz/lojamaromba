@@ -28,7 +28,6 @@ body {
   align-items:center;
   margin:unset;
   width:100%;
-  background-color:;
 }
 .bar form{
   width:100%;
@@ -39,8 +38,9 @@ body {
   flex-direction:row;
   align-items:center;
   background: #5f3a97;
-  height: 80px;
+  height: fit-content;
   width: 100%;
+  padding:10 0 10 0;
   justify-content:space-between;
 }
 
@@ -82,7 +82,7 @@ ul {
   justify-content:center;
   list-style-type: none;
   margin: 0;
-  padding: 0 0 0 0px;
+  padding:5 0 5 0;
   overflow: hidden;
   background-color: #7949c1;
   width:100%;
@@ -112,7 +112,7 @@ ul {
   margin:unset;
   z-index: 1;
   width:219px;
-  height:58px;
+  height:70px;
 }
 
 
@@ -245,7 +245,6 @@ input:focus{
   text-align:center;
 }
 
-
 footer{
   font-size:14px;
   color:white;
@@ -270,8 +269,19 @@ footer{
   margin:5;
 }
 
-#rodape .subir{
+.subir{
+  font-family:initial;
   color:#ff734a;  
   font-size:30px;
   font-weight:900;
+  padding:9 12 0 12px;
+  border-radius:15px;
+  background-color:#47109bad
+}
+
+.subir:hover{
+  cursor:pointer;
+  color:#5f3a97;
+  background-color:#ff734a;
+  
 }
