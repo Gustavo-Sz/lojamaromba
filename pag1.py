@@ -25,7 +25,7 @@ def cadastrar():
 
     if request.method == "POST":
         dados = [request.form['nome'], request.form['email'], request.form['senha']]
-        if dados[0] is not "" and dados[1] is not "" and dados[2] is not "":
+        if dados[0] != "" and dados[1] != "" and dados[2] != "":
             db = banco_de_dados()
             a = [dados[0], dados[1], dados[2], None]
             status = db.cadastrar_usuario(a)
@@ -50,7 +50,7 @@ def logar():
         email = str(request.form['email'])
         senha = str(request.form['senha'])
         session['admin'] = False
-        if email is not "" and senha is not "":
+        if email != "" and senha != "":
 
             if (email == "admin" and senha == "admin"):
 

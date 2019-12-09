@@ -49,20 +49,28 @@
             <h1>{{categ}}</h1>
             <div class="itemsplano">
                 {% for x in cat: %}
-                <div class="itemcard">
-                        <div class="nome">{{x[1]}}</div>
+                <div class="itemcard" title="Clique para ir à página do produto">
+                        <form class='itemsform' action="/item" method='POST'>
+                            <button class='itemsbt' name='codigo' value='{{x[0]}}' type='submit'>
+                                <div class="nome">{{x[1]}}</div>
+                                {% if admin: %}
+                                    <div class="codigo">{{x[0]}}</div>
+                                {% endif %}
+                                <img src="{{x[3]}}" alt="">
+                                <div class="preco">R$ {{x[2]}}</div>
+                            </button>
+                        </form>
                         {% if admin: %}
-                        <div class="adminview">
-                            <div class="codigo">{{x[0]}}</div>
-                            <form action="/editar/remitem" method="POST">
-                                <button id="removeritem" name="codigo" value="{{x[0]}}" type="submit">X</button>
-                            </form>
-                        </div>
-                        {% endif %}
-                        <img src="{{x[3]}}" alt="">
-                        <div class="preco">R$ {{x[2]}}</div>
-                    </div>
-                {% endfor%}
+                                    <div class="adminview" title="Remover item">
+                                        <form action="/editar/rempromo">
+                                            <button id="removeritem" name='codigo' value="{{x[0]}}" type='submit'>
+                                                X
+                                            </button>
+                                        </form>
+                                    </div>
+                                {% endif %}
+                    </div>            
+                    {% endfor %}
             </div>
         </div>
     </body>

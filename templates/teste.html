@@ -1,34 +1,24 @@
-<!DOCTYPE html5>
 <html>
-    <head>
-        <title>
-            Bem-Vindo meu esforçado !
-        </title>
-
-        <script
-        src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-        crossorigin="anonymous"></script>
-
-        <script>
-                function sb(){
-                    $('form1').submit()
-                }
-            </script>
-    </head>
-        <body>
-             
-                <div class="bar">
-                        <ul>
-                            <li><p id="cat" name="Óleos Essenciais">Óleos Essenciais</p></li>
-                            <li><p id="cat" name="Whey Protein">Whey Protein</p></li>
-                            <li><p id="cat" name="Vitaminas">Vitaminas</p></li>
-                            <li><p id="cat" name="Proteínas">Proteínas</p></li>
-                            <li><p id="cat" name="Termogênicos">Termogênicos</p></li>
-                            <li><p id="cat" name="Hipercalóricos">Hipercalóricos</p></li>
-                            <li><p id="cat" name="Pré-treinos">Pré-treinos</p></li>
-                        </ul>
-                    </div>
-            
-        </body>
+    <div class="itemcard">
+        <form class='itemsbt' action="/item" method='POST'>
+            <button class='itemsbt' name='codigo' value='{{x[0]}}' type='submit'>
+                <div class="nome">{{x[2]}}</div>
+                {% if admin: %}
+                    <div class="codigo">{{x[0]}}</div>
+                {% endif %}
+                <img src="{{x[4]}}" alt="">
+                <div class="preco_antigo">R$ {{x[1]}}</div>
+                <div class="preco">R$ {{X[3]}}</div>
+            </button>
+        </form>
+        {% if admin: %}
+            <div class="adminview">
+                <form action="/editar/rempromo">
+                    <button id="removeritem" name='codigo' value="{{x[0]}}" type='submit'>
+                        X
+                    </button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
 </html>
