@@ -111,7 +111,7 @@ ul {
   margin:unset;
   z-index: 1;
   width:219px;
-  height:58;
+  height:58px;
 }
 
 #img2{
@@ -151,7 +151,7 @@ ul {
   margin-bottom:15px;
   background-color:white;
   border-radius:15px;
-  width:25%;
+  width:350;
   padding:25;
 }
 
@@ -163,7 +163,7 @@ ul {
   align-items:left;
   background-color:white;
   width:100%;
-  padding:15;
+  padding:10;
 
 }
 
@@ -174,7 +174,6 @@ ul {
 }
 
 .left{
-  margin:10;
   padding:10;
   display:flex;
   flex-direction:column;
@@ -207,8 +206,7 @@ ul {
   display:flex;
   flex-direction:column;
   justify-content:center;
-  align-items:center;e>
-  margin:10;
+  align-items:center;
   padding:10;
   width:100%;
 }
@@ -232,4 +230,32 @@ title{
 }
 .descricao{
   margin:15;
+}
+
+.adminview{
+  padding:unset;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  justify-content:center;
+  height:100%;
+  width:100%;
+}
+.adminview form{
+  padding:unset;
+  margin:unset;
+}
+
+#removeritem{
+  color:white;
+  font-weight:900;
+  border:unset;
+  border-radius:15px;
+  padding:1 10 1 10;
+  background-color:#ff00007a;
+}
+
+#removeritem:hover{
+  cursor:pointer;
+  background-color:#ff0000;
 }

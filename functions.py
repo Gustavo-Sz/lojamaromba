@@ -68,7 +68,7 @@ class banco_de_dados():
             """, (codigo, nome, preco, categoria, arq_imagem, dataAdd, None))
             db.commit()
             db.close()
-            arq = open(str(codigo)+".txt", 'w')
+            arq = open(str(os.getcwd())+"\\descricoes\\%s.txt" % (codigo), 'w')
             arq.write(descricao)
             arq.close()
             return True
@@ -80,15 +80,22 @@ class banco_de_dados():
 
         db = self.__conectardb()
         cur = db.cursor()
+        try:
+            os.remove(str(os.getcwd())+"\\descricoes\\%s.txt" % (codigo))
+            status = ""
+        except FileNotFoundError: 
+            status = "Arquivo da descrição não encontrado."
 
         try:
             cur.execute("""DELETE FROM itens WHERE codigo = '%s'""" % (codigo))
             db.commit()
             db.close()
-            return "Item removido"
+            status = status+" Item removido"
+            return status
         except:
             db.close()
-            return "Codigo não existe"
+            status = status+" Codigo não existe"
+            return status
 
     def att_preco(self, codigo, preco_novo):
 
@@ -160,7 +167,6 @@ class banco_de_dados():
         coditens = []
         for line in itens:
                 coditens.append(line.strip("\n").split(":")[0])
-
         if codigo_item in coditens:
             arq = arq_promocao("w")
             for line in itens:

@@ -62,8 +62,8 @@
                         </form>
                         {% if admin: %}
                                     <div class="adminview" title="Remover item">
-                                        <form action="/editar/rempromo">
-                                            <button id="removeritem" name='codigo' value="{{x[0]}}" type='submit'>
+                                        <form action="/editar/remitem" method='POST'>
+                                            <button id="removeritem" name='codigo' value='{{x[0]}}'' type='submit'>
                                                 X
                                             </button>
                                         </form>

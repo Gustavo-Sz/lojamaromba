@@ -43,8 +43,16 @@
         </div>
         <div class="painel-principal">
                 <!-- INFOS = [codigo, nome, preco, categoria, img, data, id, descricao] -->
-
             <div class="superior">
+                {% if admin: %}
+                    <div class="adminview" title="Remover item">
+                        <form action="/editar/remitem" method='POST'>
+                            <button id="removeritem" name='codigo' value='{{infos[0]}}' type='submit'>
+                                X
+                            </button>
+                        </form>
+                    </div>
+                {% endif %}
                 <div class="left">
                     <div class="nome">{{infos[1]}}</div>
                     {% if admin: %}

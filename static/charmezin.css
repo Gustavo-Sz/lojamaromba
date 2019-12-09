@@ -39,7 +39,7 @@ body {
   flex-direction:row;
   align-items:center;
   background: #5f3a97;
-  height: 80px;
+  height: fit-content;
   width: 100%;
   justify-content:space-between;
 }
@@ -112,7 +112,7 @@ ul {
   margin:unset;
   z-index: 1;
   width:219px;
-  height:58;
+  height:58px;
 }
 
 
@@ -124,6 +124,7 @@ ul {
   
 
 .painel-principal{
+    margin-top:15px;
     font-family: monospace;
     height:fit-content;
     width:95%;  
@@ -219,12 +220,13 @@ input:focus{
 
 .addpromobt a{
   font-family:sans-serif;
- margin:59 36 59 36;
+ margin:42 35 42 35;
  display:flex;
  flex-direction:column;
  justify-content:center;
  text-decoration:none; 
 }
+
 
 
 .addpromobt a:hover{

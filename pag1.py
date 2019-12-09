@@ -98,7 +98,7 @@ def editarCatalogo():
 @app.route('/editar/additem', methods=['GET', 'POST'])
 def additem():
     if session['admin']:
-        if request.method == "GET":
+        if request.method == 'GET':
             return render_template("editar_catalogo.html", acao="opcao1",login=session.get('logado'), admin =session.get('admin'), categs = lista_de_categorias().keys())
         elif request.method == 'POST':
             nome = request.form['nome']
@@ -125,17 +125,15 @@ def remitem():
     if session['admin']:
         if request.method == 'GET':
             return render_template('editar_catalogo.html', acao="opcao2",login=session.get('logado'), admin =session.get('admin'))
-        elif request.method == "POST":    
+        elif request.method == 'POST':    
             codigo = request.form['codigo']
-
-            if codigo == "":
+            if codigo == "":    
                 flash('Preencha o campo !')
-                return redirect(url_for('editarCatalogo'))
             else:
                 db = banco_de_dados()
                 status = db.del_item(codigo)
                 flash(status)
-                return redirect(url_for('editarCatalogo'))
+            return render_template('editar_catalogo.html', acao="opcao2",login=session.get('logado'), admin =session.get('admin'))
 
 
 @app.route('/editar/addpromo', methods=['GET', 'POST'])
@@ -165,7 +163,7 @@ def rempromo():
             codigo = request.form['codigo']
             db = banco_de_dados()
             status = db.rem_promocao(codigo)
-            flash(status)
+            flash(str(status))
             return render_template('editar_catalogo.html', acao="rempromo", login=session.get('logado'), admin=session.get('admin'))
 
 
