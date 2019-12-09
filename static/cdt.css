@@ -245,3 +245,33 @@ input:focus{
   text-align:center;
 }
 
+
+footer{
+  font-size:14px;
+  color:white;
+  padding:15 0 15 0;
+  display:flex;
+  flex-direction:row;
+  justify-content:space-around;
+  align-items:center;
+  background: #5f3a97;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+}
+#rodape .esquerda, #rodape .meio,#rodape .direita{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:left;
+}
+
+.nomerodape, .enderecorodape, .cnpjrodape, .emailrodape, .contatorodape{
+  margin:5;
+}
+
+#rodape .subir{
+  color:#ff734a;  
+  font-size:30px;
+  font-weight:900;
+}
