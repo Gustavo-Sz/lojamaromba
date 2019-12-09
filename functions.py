@@ -10,6 +10,7 @@ def arq_descricao(codigo):
     try:
         arq = open(str(codigo)+".txt", 'r')
         descricao = arq.readlines()
+        descricao = descricao[0]
         return descricao
     except FileNotFoundError:
         return "Arquivo de descrição não encontrado"

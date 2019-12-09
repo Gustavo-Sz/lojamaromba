@@ -13,6 +13,7 @@ body {
 }
 
 .corpo{
+  margin:50;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -23,8 +24,13 @@ body {
 .bar{
   display:flex;
   flex-direction:row;
+  justify-content: space-between;
   align-items:center;
   margin:unset;
+  width:100%;
+  background-color:;
+}
+.bar form{
   width:100%;
 }
 
@@ -36,9 +42,7 @@ body {
   height: 80px;
   width: 100%;
   justify-content:space-between;
-
 }
-
 
 .headerbuttons{
   display:flex;
@@ -50,8 +54,6 @@ body {
 .headerbuttons a{
   margin:3;
 }
-
-
 
 .buttons {
   margin:10;
@@ -119,12 +121,27 @@ ul {
   width:20px;
   height:20px;
   }
-s 
+  
+
+.painel-principal{
+    font-family: monospace;
+    height:fit-content;
+    width:95%;  
+  }
+
+.painel-principal h1{
+  width:fit-content;
+  font-size:35;
+  font-weight:100;
+  color:#5f3a97;
+  margin:0 0 0 0;
+}
+ 
 
 #cdt {
     background-color:#5f3a97;
     border-radius:15px;
-    width:360;
+    width:300;
     height:fit-content;
   padding: 10 10 10 10;
      display:flex;
@@ -148,7 +165,7 @@ h1{
 #lgn{
   background-color:#5f3a97;
   border-radius:15px;
-  width:360;
+  width:300;
   height:fit-content;
   padding: 10 10 10 10;
   display:flex;
@@ -167,7 +184,7 @@ h3{
 }
 
 .corpo form{
-  padding:40 0 0 10;
+  padding:40 0 0 0;
 }
 
 
