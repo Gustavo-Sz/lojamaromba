@@ -151,7 +151,7 @@ ul {
   margin-bottom:15px;
   background-color:white;
   border-radius:15px;
-  width:fit-content;
+  width:25%;
   padding:25;
 }
 
@@ -160,15 +160,15 @@ ul {
   display:flex;
   flex-direction:column;
   justify-content:space-evenly;
-  align-items:center;
+  align-items:left;
   background-color:white;
-  width:fit-content;
+  width:100%;
   padding:15;
-  
+
 }
 
 .inferior .title{
-  border-bottom:2px solid;
+  border-bottom:1px solid;
   font-size:30px;
   font-weight:600;
 }
@@ -180,6 +180,7 @@ ul {
   flex-direction:column;
   justify-content:center;
   align-items:center;
+  width:100%;
   height:fit-content;
   border-bottom:3px solid #d9d9d9
 }
@@ -209,7 +210,7 @@ ul {
   align-items:center;e>
   margin:10;
   padding:10;
-  width:50%;
+  width:100%;
 }
 .preco{
   font-size:30px;
@@ -225,8 +226,9 @@ title{
 }
 
 .inferior .title{
-  color: #ff734a;
-  font-size:25;
+  width:fit-content;
+  color: #0c0c0c;
+  font-size:20;
 }
 .descricao{
   margin:15;
