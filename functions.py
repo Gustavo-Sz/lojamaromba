@@ -7,8 +7,9 @@ def arq_promocao(modo):
     return  open("promos.txt", str(modo))
 
 def arq_descricao(codigo):
+    end = str(os.getcwd())+"\\descricoes\\"
     try:
-        arq = open(str(codigo)+".txt", 'r')
+        arq = open(end+str(codigo)+".txt", 'r')
         descricao = arq.readlines()
         descricao = descricao[0]
         return descricao
