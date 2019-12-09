@@ -164,9 +164,7 @@ def rempromo():
         elif request.method == 'POST':
             codigo = request.form['codigo']
             db = banco_de_dados()
-            print(codigo)
             status = db.rem_promocao(codigo)
-            print(status)
             flash(status)
             return render_template('editar_catalogo.html', acao="rempromo", login=session.get('logado'), admin=session.get('admin'))
 

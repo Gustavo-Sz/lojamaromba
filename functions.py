@@ -19,7 +19,6 @@ def data_atual():
     return i
 
 def lista_de_categorias():
-    print("Entrou na lista_de_categorias")
     dic = {'VITAMINAS': 100,'WHEYPROTEIN': 200,'PROTEINAS': 300,'OLEOSESSENCIAIS': 400,'HIPERCALORICOS': 500,'TERMOGENICOS': 600,'PRETREINOS': 700} 
     return dic
 
@@ -67,10 +66,13 @@ class banco_de_dados():
             """, (codigo, nome, preco, categoria, arq_imagem, dataAdd, None))
             db.commit()
             db.close()
+            arq = open(str(codigo)+".txt", 'w')
+            arq.write(descricao)
+            arq.close()
             return True
         except:
             db.close()
-            return False
+            return "Não foi possível adicionar o item"
 
     def del_item(self, codigo):
 
@@ -105,7 +107,6 @@ class banco_de_dados():
 
         db = self.__conectardb()
         cur = db.cursor()
-        print("Conectou ao db na funcao listar_categoria")
         cur.execute("""SELECT * FROM itens where categoria = '%s'
         """ % (categoria))
         itens = cur.fetchall()
@@ -201,7 +202,6 @@ class banco_de_dados():
             dblist = dblist[0]
             for x in dblist:
                 itens[line].append(x)
-                print(itens[line])
             # [codigo, preco_antigo, nome, preco_novo, imagem]
         db.close()
         return itens
@@ -212,7 +212,6 @@ class banco_de_dados():
         value = (codigo,)
         cur.execute("SELECT * FROM itens WHERE codigo = ?", value)
         infos = cur.fetchall()
-        print(infos)
         if infos == []:
             return False
         else:
@@ -220,7 +219,6 @@ class banco_de_dados():
             db.close()
             descricao = arq_descricao(codigo)
             infos.append(descricao)
-            print(infos)
             return infos
 
     def contar_itens(self, categ):
