@@ -190,6 +190,8 @@ def catalogo():
     db = banco_de_dados()
     categ = request.form['botao-categorias']
     a = db.listar_categoria(categ)
+    dic = {'VITAMINAS': "Vitaminas",'WHEYPROTEIN': "Whey Protein",'PROTEINAS': 'Proteínas','OLEOSESSENCIAIS':'Óleos Essenciais','HIPERCALORICOS': 'Hipercalóricos','TERMOGENICOS': 'Termogênicos','PRETREINOS': 'Pré-treinos'}
+    categ = dic[categ]
     for x in range(len(a)):
         a[x] = [a[x][0], a[x][1], a[x][2], "static/imgprodutos/"+str(a[x][4])]
     categ = str(categ).capitalize()

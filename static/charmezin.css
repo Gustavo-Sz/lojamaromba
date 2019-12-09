@@ -124,13 +124,13 @@ ul {
   
 
 .painel-principal{
-    margin-top:15px;
     font-family: monospace;
     height:fit-content;
     width:95%;  
   }
 
 .painel-principal h1{
+  text-transform: capitalize;
   width:fit-content;
   font-size:35;
   font-weight:100;
