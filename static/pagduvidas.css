@@ -1,6 +1,5 @@
-
 body{
-  font-family: monospace;
+  font-family:monospace;
   margin:unset;
   top:0;
   left:0;
@@ -21,14 +20,54 @@ body{
 }
 
 .corpo{
-  margin:50;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width:100%;
-  height:fit-content;
+  margin-bottom:20;
 }
 
+.painelduvida{
+  margin:10;
+  padding:20;
+  background-color:white;
+  border-radius:15px;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content:center;
+}
+
+.painelduvida img{
+  width:30vh;
+}
+.cima{
+  margin:10;
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+}
+.baixo{
+  margin:10;
+}
+.esquerda{
+  margin:10;
+  padding:unset;
+  width:fit-content;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+.direita{
+  margin:10;
+  padding:unset;
+  width:fit-content;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+.painelduvida h1{
+  color: #ff734a
+}
 
 .bar{
   display:flex;
@@ -128,68 +167,8 @@ ul {
   width:20px;
   height:20px;
   }
+
   
-
-
-.painel-principal h1{
-  width:fit-content;
-  font-size:35;
-  font-weight:100;
-  color:#5f3a97;
-  margin:0 0 0 0;
-}
- 
-
-#cdt {
-    background-color:#5f3a97;
-    border-radius:15px;
-    width:300;
-    height:fit-content;
-  padding: 10 10 10 10;
-     display:flex;
-  flex-direction:column;
-  text-align:center;
-  justify-content:space-around;
-  align-items:center;
-}
-
-h1{
-  font-size:35;
-  font-weight:400;
-  font-family:monospace;
-  width:fit-content;
-  height:fit-content;
-  border-bottom:3px solid #ff734a;
-  color:#ff734a;
-  margin:unset;
-}
-
-#lgn{
-  background-color:#5f3a97;
-  border-radius:15px;
-  width:300;
-  height:fit-content;
-  padding: 10 10 10 10;
-  display:flex;
-  flex-direction:column;
-  text-align:center;
-  justify-content:space-around;
-  align-items:center;
-}
-
-
-h3{
-    position:relative;
-    left:auto;
-    color:#ff9473;
-    font-size: 0px;
-}
-
-.corpo form{
-  padding:40 0 0 0;
-}
-
-
 input {
   position:relative;
   z-index:1;
@@ -215,22 +194,6 @@ input:focus{
   outline:none;
 }
 
-#senha::placeholder{
-  background:url(passwordicon.png) no-repeat center left; 
-}
-
-#email::placeholder{
-  background:url(at.png) no-repeat center left;
-  background-size:25px 25px;
-}
-
-#senha:focus::placeholder,#email:focus::placeholder{
-  background:unset; 
-}
-
-#bt6 {   
-  border:0;
-}
 
 .flashdiv{
   margin:0;

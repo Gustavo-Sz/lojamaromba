@@ -243,3 +243,8 @@ class banco_de_dados():
         qtd_itens = self.contar_itens(categ)
         codigo_produto = str(list_cat[categ]) + str(qtd_itens)
         return int(codigo_produto)
+
+    def enviar_duvida(self, codigo, nome, email, duvida):
+        db = self.__conectardb()
+        cur = db.cursor()
+        

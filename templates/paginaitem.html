@@ -45,7 +45,12 @@
         </div>
         <div class="painel-principal">
                 <!-- INFOS = [codigo, nome, preco, categoria, img, data, id, descricao] -->
-            <div class="superior">
+                <div class="superior">
+                <div class="botaoduvida">
+                    <form action="/duvidas" method="POST" title="Envie uma duvida sobre este item">
+                        <button id="duvida" name='opcao' value='{{infos[0]}}' type="submit">?</button>
+                    </form>
+                </div>
                 {% if admin: %}
                     <div class="adminview" title="Remover item">
                         <form action="/editar/remitem" method='POST'>

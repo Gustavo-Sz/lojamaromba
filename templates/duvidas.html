@@ -1,0 +1,93 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='pagduvidas.css')}}">
+        <title>Loja Maromba - Envie sua duvida</title>
+
+    </head>
+    <body>
+        <div class="cabecalho">
+            <div class="bar-box">
+                    <a href="{{url_for('home')}}"><img id="img1" src="{{url_for('static', filename='logo.jpg')}}"></a>
+                        <div class="headerbuttons">
+                            {% if login: %}
+                                {% if admin: %}
+                                    <a href="{{url_for('editarCatalogo')}}"class="buttons" id="bt5">Editar Catálogo</a>
+                                {% endif %}
+                                <a href="{{url_for('carrinho')}}"class="buttons" id="bt4"><img id="img2" src="{{url_for('static', filename='carrinho.png')}}"></a>
+                                <a href="{{url_for('minhaConta')}}" class="buttons" id="bt3">Minha Conta</a>
+                                <a href="{{url_for('sair')}}" class="buttons" id='bt6'>Sair</a>
+                            {% else: %}
+                                <a href="{{url_for('logar')}}" class="buttons" id="bt2">Entrar</a>
+                                <a href="{{url_for('cadastrar')}}" class="buttons" id="bt1">Cadastre-se</a>
+                            {% endif %}
+                        </div>
+            </div> 
+            <div class="bar">
+                        <form action="/categoria" method="POST">
+                            <ul>
+                                <li>
+                                    <button class="botao-categorias" name="botao-categorias" type="submit" value="OLEOSESSENCIAIS">
+                                    Óleos Essenciais</button>
+                                </li>
+                                <li><button class="botao-categorias" name="botao-categorias" type="submit" value="WHEYPROTEIN">Whey Protein</button></li>
+        
+                                <li><button class="botao-categorias" name="botao-categorias" type="submit" value="VITAMINAS">Vitaminas</button></li>
+        
+                                <li><button class="botao-categorias" name="botao-categorias" type="submit" value="PROTEINAS">Proteínas</button></li>
+        
+                                <li><button class="botao-categorias" name="botao-categorias" type="submit" value="HIPERCALORICOS">Hipercalóricos</button></li>
+        
+                                <li><button class="botao-categorias" name="botao-categorias" type="submit" value="TERMOGENICOS">Termogênicos</button></li>
+        
+                                <li><button class="botao-categorias" name="botao-categorias" type="submit" value="PRETREINOS">Pré-treino</button></li>
+                            </ul>
+                        </form>
+            </div>
+        </div>
+        <div class="corpo">
+            <form class="painelduvida" action="/duvidas/enviar" method="POST">
+                <h1>Envie sua duvida</h1>
+                <div class="cima">
+                        <div class="esquerda">
+                                <div name="codigo" value="{{item[0]}}" class="codigo">{{item[0]}}</div>
+                                <img src="{{item[4]}}" alt="">
+                        </div>
+                        <div class="direita">
+                            {% if not login: %}
+                                <input type="text" placeholder="Nome" name="nome">
+                                <input type="text" placeholder="Email" name="email">
+                            {% endif %}
+                            <input type="text" placeholder="Escreve aqui sua dúvida" name="descricao">
+                        </div>
+                </div>
+                <div class="baixo">
+                        {% with flashes = get_flashed_messages() %}
+                        {% if flashes: %}
+                            <div class="flashdiv" id="flashlog">
+                                {% for x in flashes:%}
+                                    <li>{{ x }}</li>
+                                {% endfor %}
+                            </div>
+                            <br>
+                        {% endif %}
+                    {% endwith %}
+                    <button class="buttons" name="opcao" value="enviar" type="submit">Enviar</button>
+                </div>
+            </form>
+        </div>
+        <div id="rodape">
+            <div class="esquerda">
+                 <div class="contatorodape">Contato: 2025-2323</div> 
+             <div class="emailrodape">Email: mktbom@gmail.com</div>
+            </div>    
+            <div class="meio">
+                 <div class="nomerodape">&copy;D-Vitaminas</div>
+                 <div class="enderecorodape">Endereço: Av. da Américas, 19.019 - Recreio dos bandeirantes, Loja 205j </div>
+                 <div class="cnpjrodape" >CNPJ : 12.071.622/0001-90</div>
+            </div>
+            <div class="direita">
+                <div class="subir" onclick="window.scrollTo(0,0);">^</div>
+            </div>
+        </div>  
+    </body>
+</html>

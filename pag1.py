@@ -207,5 +207,65 @@ def pagitem():
     infos[4] = "static/imgprodutos/"+str(infos[4])
     return render_template("paginaitem.html", login=session.get('logado'), admin =session.get('admin'), infos = infos)
 
+@app.route('/duvidas', methods=['GET','POST'])
+def duvidas():
+    if session.get('admin'):
+        db = banco_de_dados()
+        lista_duvidas = db.listar_duvidas()
+        return render_template('duvidas.html', login=session.get('logado'), admin =session.get('admin'), duvidas = lista_duvidas)
+    else:
+        if request.method == "POST":
+            if request.form['opcao'] != 'enviar':
+                codigo = request.form['opcao']
+                db = banco_de_dados()
+                item = db.buscar_item(codigo)
+                item[4] = "static/imgprodutos/"+str(item[4])
+                return render_template('duvidas.html', login=session.get('logado'), admin =session.get('admin'), item = item)
+            else:
+                if session.get('logado'):
+                    nome = usuario.mostrar_dados()[0]
+                    email = usuario.mostrar_dados()[1]
+                else:
+                    nome = request.form['nome']
+                    email = request.form['email']
+            
+                codigo = request.form['codigo']
+                duvida = request.form['duvida']
+
+                if nome == "" or email == "" or duvida == "":
+                    flash('Preencha todos os campos')
+                    db = banco_de_dados()
+                    item = db.buscar_item(codigo)
+                    return render_template('duvidas.html', login=session.get('logado'), admin =session.get('admin'), item = item)
+                else: 
+                    db = banco_de_dados()
+                    status = db.enviar_duvida(codigo, nome, email, duvida)
+                    flash(status)
+                    return render_template('duvidas.html', login=session.get('logado'), admin =session.get('admin'), item = item)
+        
+@app.route('/duvidas/enviar', methods=['POST'])
+def enviarduvida():
+ 
+        if session.get('logado'):
+            nome = usuario.mostrar_dados()[0]
+            email = usuario.mostrar_dados()[1]
+        else:
+            nome = request.form['nome']
+            email = resquest.form['email']
+    
+        codigo = request.form['codigo']
+        duvida = request.form['duvida']
+
+        if nome == "" or email == "" or duvida == "":
+            flash('Preencha todos os campos')
+            db = banco_de_dados()
+            item = db.buscar_item(codigo)
+            return render_template('duvidas.html', login=session.get('logado'), admin =session.get('admin'), item = item)
+        else: 
+            db = banco_de_dados()
+            status = db.enviar_duvida(codigo, nome, email, duvida)
+            flash(status)
+            return render_template('duvidas.html', login=session.get('logado'), admin =session.get('admin'), item = item)
+
 webbrowser.open('http:\\localhost:5000', new=1)
 app.run(debug=True)
