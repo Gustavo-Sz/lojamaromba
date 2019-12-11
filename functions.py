@@ -161,7 +161,7 @@ class banco_de_dados():
             return "O produto já está nesse preço"
         elif float(preco_antigo) < float(preco_novo):
             return "Isso não é uma promoção"
-
+    
         db.close()
         status = self.att_preco(codigo_item, preco_novo) 
         if not status:

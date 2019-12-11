@@ -121,6 +121,7 @@ def additem():
                     flash('Algo deu errado !')
             return render_template("editar_catalogo.html",acao="opcao1",login=session.get('logado'), admin =session.get('admin'), categs = lista_de_categorias().keys())
 
+
 @app.route('/editar/remitem', methods=['GET', 'POST'])
 def remitem():
     if session['admin']:
