@@ -2,7 +2,7 @@ from flask import Flask, render_template, session, flash, redirect, url_for, req
 import webbrowser, sqlite3, os
 from users import User
 from produtos import Produto
-from functions import banco_de_dados, lista_de_categorias
+from functions import banco_de_dados, lista_de_categorias, enviar_email
 
 app = Flask(__name__)
 app.secret_key = os.urandom(12)
@@ -202,7 +202,7 @@ def catalogo():
 def pagitem():
     codigo = request.form['codigo']
     db = banco_de_dados()
-    infos = db.buscar_item(codigo)
+    infos = db.buscar_item((codigo,))
     # INFOS = [codigo, nome, preco, categoria, img, data, id, descricao]
     infos[4] = "static/imgprodutos/"+str(infos[4])
     return render_template("paginaitem.html", login=session.get('logado'), admin =session.get('admin'), infos = infos)
@@ -212,13 +212,24 @@ def duvidas():
     if session.get('admin'):
         db = banco_de_dados()
         lista_duvidas = db.listar_duvidas()
-        return render_template('duvidas.html', login=session.get('logado'), admin =session.get('admin'), duvidas = lista_duvidas)
+        for x in range(len(lista_duvidas)):
+            img = db.buscar_item((lista_duvidas[x][0],))
+            img = "static/imgprodutos/"+str(img[4])
+            lista_duvidas[x] = [lista_duvidas[x][0],lista_duvidas[x][1],lista_duvidas[x][2],lista_duvidas[x][3], img] 
+        if 'responder' not in request.form['opcao']:
+            return render_template('duvidas.html', login=session.get('logado'), admin =session.get('admin'), duvidas = lista_duvidas, acao="ler")
+        else:
+            duvida = request.form['opcao'].split(":")
+            a = db.buscar_item((duvida[1],))
+            duvida.append("static/imgprodutos/"+str(a[4]))
+            return render_template('duvidas.html', login=session.get('logado'), admin =session.get('admin'), x = duvida, acao="responder")
+            
     else:
         if request.method == "POST":
-            if request.form['opcao'] != 'enviar':
+            if 'enviar' not in request.form['opcao']:
                 codigo = request.form['opcao']
                 db = banco_de_dados()
-                item = db.buscar_item(codigo)
+                item = db.buscar_item((codigo,))
                 item[4] = "static/imgprodutos/"+str(item[4])
                 return render_template('duvidas.html', login=session.get('logado'), admin =session.get('admin'), item = item)
             else:
@@ -228,44 +239,38 @@ def duvidas():
                 else:
                     nome = request.form['nome']
                     email = request.form['email']
-            
-                codigo = request.form['codigo']
+
+                codigo = str(request.form['opcao']).split(":")[1]
                 duvida = request.form['duvida']
 
                 if nome == "" or email == "" or duvida == "":
                     flash('Preencha todos os campos')
                     db = banco_de_dados()
-                    item = db.buscar_item(codigo)
+                    item = db.buscar_item((codigo,))
+                    item[4] = "static/imgprodutos/"+str(item[4])
                     return render_template('duvidas.html', login=session.get('logado'), admin =session.get('admin'), item = item)
                 else: 
                     db = banco_de_dados()
                     status = db.enviar_duvida(codigo, nome, email, duvida)
+                    if not status:
+                        status = "Você já enviou uma dúvida sobre esse produto. Aguarde ela ser respondida para enviar outra"
                     flash(status)
+                    item = db.buscar_item((codigo,))
+                    item[4] = "static/imgprodutos/"+str(item[4])
                     return render_template('duvidas.html', login=session.get('logado'), admin =session.get('admin'), item = item)
         
-@app.route('/duvidas/enviar', methods=['POST'])
-def enviarduvida():
- 
-        if session.get('logado'):
-            nome = usuario.mostrar_dados()[0]
-            email = usuario.mostrar_dados()[1]
-        else:
-            nome = request.form['nome']
-            email = resquest.form['email']
-    
-        codigo = request.form['codigo']
-        duvida = request.form['duvida']
-
-        if nome == "" or email == "" or duvida == "":
-            flash('Preencha todos os campos')
-            db = banco_de_dados()
-            item = db.buscar_item(codigo)
-            return render_template('duvidas.html', login=session.get('logado'), admin =session.get('admin'), item = item)
-        else: 
-            db = banco_de_dados()
-            status = db.enviar_duvida(codigo, nome, email, duvida)
-            flash(status)
-            return render_template('duvidas.html', login=session.get('logado'), admin =session.get('admin'), item = item)
+@app.route('/duvidas/responder', methods=['POST'])
+def responderduvida():
+    opcao = request.form['opcao'].split(":")
+    nome = opcao[2]
+    email = opcao[3]
+    codigo = opcao[1]
+    resposta = request.form["resposta"]
+    db = banco_de_dados()
+    item = db.buscar_item((codigo,))
+    nome_item = item[1]
+    enviar_email(nome, nome_item, email, resposta)
+    return redirect(url_for("home"))
 
 webbrowser.open('http:\\localhost:5000', new=1)
 app.run(debug=True)

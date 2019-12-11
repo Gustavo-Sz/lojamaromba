@@ -1,6 +1,6 @@
 # FETCHALL RETORNA UMA LISTA DE TUPLAS, QUE SAO AS LINHAS DO DB, MESMO QUE SO HAJA 1 LINHA SELECIONADA. LOGO, PARA ACESSAR OS ELEMENTOS, PRECISA ESPECIFICAR DOIS INDICES (DBLIST[0][1] = NOME DO PRODUTO; ln.179) OU, NO CASO DE HAVER 1 LINHA SO, TORNAR ESSA LISTA UMA TUPLA DESSA LINHA (dblist = dblist[0]) E ENTAO ACESSAR OS ELEMENTOS COM UM UNICO INDICE (dblist[x]; ln.183)
 
-import sqlite3, os, datetime
+import sqlite3, os, datetime, smtplib
 
 
 def arq_promocao(modo):
@@ -11,7 +11,7 @@ def arq_descricao(codigo):
     try:
         arq = open(end+str(codigo)+".txt", 'r')
         descricao = arq.readlines()
-        descricao = descricao[0]
+        descricao = descricao[0].strip("\n")
         return descricao
     except FileNotFoundError:
         return "Arquivo de descrição não encontrado"
@@ -23,6 +23,17 @@ def data_atual():
 def lista_de_categorias():
     dic = {'VITAMINAS': 100,'WHEYPROTEIN': 200,'PROTEINAS': 300,'OLEOSESSENCIAIS': 400,'HIPERCALORICOS': 500,'TERMOGENICOS': 600,'PRETREINOS': 700} 
     return dic
+
+def enviar_email(nome, nome_item, email, resposta):
+    server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+    server.login("donotabuser@gmail.com", "hcqvmhwzrpvbiuzk")
+    msg = """Ola %s. Aqui esta a resposta para sua duvida sobre nosso produto '%s'.
+     %s""" % (nome, nome_item, resposta)
+    server.sendmail(
+    "donotabuser@gmail.com",
+    email,
+    msg)
+    server.quit()
 
 class banco_de_dados():
     def __init__(self):
@@ -217,15 +228,15 @@ class banco_de_dados():
     def buscar_item(self, codigo):
         db = self.__conectardb()
         cur = db.cursor()
-        value = (codigo,)
-        cur.execute("SELECT * FROM itens WHERE codigo = ?", value)
+        
+        cur.execute("SELECT * FROM itens WHERE codigo = ?", codigo)
         infos = cur.fetchall()
         if infos == []:
             return False
         else:
             infos = [infos[0][0],infos[0][1],infos[0][2],infos[0][3],infos[0][4],infos[0][5],infos[0][6]]
             db.close()
-            descricao = arq_descricao(codigo)
+            descricao = arq_descricao(codigo[0])
             infos.append(descricao)
             return infos
 
@@ -247,4 +258,25 @@ class banco_de_dados():
     def enviar_duvida(self, codigo, nome, email, duvida):
         db = self.__conectardb()
         cur = db.cursor()
-        
+        cur.execute("""
+                    SELECT codigo from duvidas WHERE email = (?)
+        """, (email,))
+        duvidas_anteriores = cur.fetchall()
+        for x in range(len(duvidas_anteriores)):
+            duvidas_anteriores[x] = duvidas_anteriores[x][0]
+        if int(codigo) in duvidas_anteriores:
+            return False
+        else:
+            cur.execute("""INSERT INTO duvidas values (?,?,?,?)""", (codigo, nome, email, duvida))
+            db.commit()
+            db.close()
+            return "Duvida enviada. Aguarde um email de resposta."
+
+    def listar_duvidas(self):
+        db = self.__conectardb()
+        cur = db.cursor()
+        cur.execute("""
+                    SELECT * FROM duvidas
+        """)
+        duvidas = cur.fetchall()
+        return duvidas

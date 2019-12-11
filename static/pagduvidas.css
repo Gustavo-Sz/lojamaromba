@@ -24,9 +24,10 @@ body{
 }
 
 .painelduvida{
+  background-color:white;
   margin:10;
   padding:20;
-  background-color:white;
+  width:fit-content;
   border-radius:15px;
   display: flex;
   flex-direction: column;
@@ -35,7 +36,7 @@ body{
 }
 
 .painelduvida img{
-  width:30vh;
+  width:15vh;
 }
 .cima{
   margin:10;
@@ -44,7 +45,17 @@ body{
   align-items:center;
 }
 .baixo{
+  height:;
   margin:10;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.cardduvida .baixo{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
 }
 .esquerda{
   margin:10;
@@ -68,6 +79,46 @@ body{
 .painelduvida h1{
   color: #ff734a
 }
+
+.cardduvida{
+  padding:10;
+  background-color:white;
+  border-radius:15px;
+  margin:10;
+  display:flex;
+  flex-direction:row;
+  width:100%;
+}
+
+.cardduvida .duvida{
+  border-top:2px  #d9d9d9;
+  padding:10;;
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:center;
+  overflow:auto;
+  padding:10;
+  margin:10;
+  width:50vh;
+}
+
+.cardduvida .info{
+  border-left: 2px solid #d9d9d9;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+.info .nome{
+  margin:5;
+}
+
+.info .email{
+  margin:5;
+}
+
 
 .bar{
   display:flex;
@@ -99,9 +150,20 @@ body{
   padding:0 10 0 0;
 }
 
-.headerbuttons a{
+.headerbuttons a, .headerbuttons form{
   margin:3;
 }
+.headerbuttons button{
+  background-color:unset;
+  border:unset;
+  color:#e5734a;
+  font-size:17px;
+  font-family:monospace;
+  font-weight:100;
+  border:unset;
+
+}
+
 
 .buttons {
   margin:10;
@@ -197,10 +259,10 @@ input:focus{
 
 .flashdiv{
   margin:0;
-  width:100%;
+  width:80vh;
   font-size:22px;
   list-style-type:none;
-  color: snow;
+  color: black;
 
 }
 

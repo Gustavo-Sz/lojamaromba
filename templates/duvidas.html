@@ -7,14 +7,13 @@
     <body>
         <div class="cabecalho">
             <div class="bar-box">
-                    <a href="{{url_for('home')}}"><img id="img1" src="{{url_for('static', filename='logo.jpg')}}"></a>
+                    <a href="{{url_for('home')}}"><img id="img1" src="{{url_for('static', filename='logo.jpg')}}" title="Clique para ir à página inicial"></a>
                         <div class="headerbuttons">
                             {% if login: %}
                                 {% if admin: %}
                                     <a href="{{url_for('editarCatalogo')}}"class="buttons" id="bt5">Editar Catálogo</a>
+                                    <a href="{{url_for('duvidas')}}" class="buttons" id="bt3">Duvidas</a>
                                 {% endif %}
-                                <a href="{{url_for('carrinho')}}"class="buttons" id="bt4"><img id="img2" src="{{url_for('static', filename='carrinho.png')}}"></a>
-                                <a href="{{url_for('minhaConta')}}" class="buttons" id="bt3">Minha Conta</a>
                                 <a href="{{url_for('sair')}}" class="buttons" id='bt6'>Sair</a>
                             {% else: %}
                                 <a href="{{url_for('logar')}}" class="buttons" id="bt2">Entrar</a>
@@ -45,35 +44,79 @@
             </div>
         </div>
         <div class="corpo">
-            <form class="painelduvida" action="/duvidas/enviar" method="POST">
-                <h1>Envie sua duvida</h1>
-                <div class="cima">
-                        <div class="esquerda">
-                                <div name="codigo" value="{{item[0]}}" class="codigo">{{item[0]}}</div>
-                                <img src="{{item[4]}}" alt="">
-                        </div>
-                        <div class="direita">
-                            {% if not login: %}
-                                <input type="text" placeholder="Nome" name="nome">
-                                <input type="text" placeholder="Email" name="email">
-                            {% endif %}
-                            <input type="text" placeholder="Escreve aqui sua dúvida" name="descricao">
-                        </div>
-                </div>
-                <div class="baixo">
-                        {% with flashes = get_flashed_messages() %}
-                        {% if flashes: %}
-                            <div class="flashdiv" id="flashlog">
-                                {% for x in flashes:%}
-                                    <li>{{ x }}</li>
-                                {% endfor %}
+            {% if not admin: %}
+            <form class="painelduvida" action="/duvidas" method="POST">
+                    <h1>Envie sua duvida</h1>
+                    <div class="cima">
+                            <div class="esquerda">
+                                    <div class="codigo" name="codigo" value="{{item[0]}}">{{item[0]}}</div>
+                                    <img src="{{item[4]}}" alt="">
                             </div>
-                            <br>
-                        {% endif %}
-                    {% endwith %}
-                    <button class="buttons" name="opcao" value="enviar" type="submit">Enviar</button>
-                </div>
+                            <div class="direita">
+                                {% if not login: %}
+                                    <input type="text" placeholder="Nome" name="nome">
+                                    <input type="text" placeholder="Email" name="email">
+                                {% endif %}
+                                <input type="text" placeholder="Escreve aqui sua dúvida" name="duvida">
+                            </div>
+                    </div>
+                    <div class="baixo">
+                            {% with flashes = get_flashed_messages() %}
+                            {% if flashes: %}
+                                <div class="flashdiv" id="flashlog">
+                                    {% for x in flashes:%}
+                                        <li>{{ x }}</li>
+                                    {% endfor %}
+                                </div>
+                                <br>
+                            {% endif %}
+                        {% endwith %}
+                        <button class="buttons" name="opcao" value="enviar:{{item[0]}}" type="submit">Enviar</button>
+                    </div>
             </form>
+            {% else: %}
+                    {% if acao == "ler": %}
+                        {% for x in duvidas: %}
+                            <form class="cardduvida" action="/duvidas" method="POST">
+                                <div class="cima">
+                                    <div class="esquerda">
+                                        <div class="codigo">{{x[0]}}</div>
+                                        <img src="{{x[4]}}" alt="">
+                                    </div>
+                                </div>
+                                <div class="info">
+                                    <div class="nome">{{x[1]}}</div>
+                                    <div class="email" name="email" value="{{x[2]}}">{{x[2]}}</div>
+                                    <div class="duvida">
+                                        {{x[3]}}
+                                    </div>
+                                </div>
+                                <div class="baixo">
+                                    <button class="buttons" name="opcao" value="responder:{{x[0]}}:{{x[1]}}:{{x[2]}}" type="submit">Responder</button>
+                                </div>
+
+                            </form>
+                        {% endfor %}
+                    {% elif acao == "responder" %}
+                            <form class="painelduvida" action="/duvidas/responder" method="POST">
+                                <div class="cima">
+                                        <div class="esquerda">
+                                            <div class="codigo">{{x[1]}}</div>
+                                            <img src="{{x[4]}}" alt="">
+                                        </div>
+                                        <div class="direita">
+                                            <div class="nome">{{x[2]}}</div>
+                                            <div class="email">{{x[3]}}</div>
+                                        </div>
+                                </div>
+                                <div class="baixo">
+                                    <input type="text" name="resposta" placeholder="Responda aqui !">
+                                    <button class="buttons" name="opcao" value="enviar:{{x[1]}}:{{x[2]}}:{{x[3]}}" type="submit">Enviar</button>
+                                </div>
+                            </form>
+                    {% endif %}
+                
+            {% endif %}
         </div>
         <div id="rodape">
             <div class="esquerda">

@@ -52,9 +52,20 @@ body{
   padding:0 10 0 0;
 }
 
-.headerbuttons a{
+.headerbuttons a, .headerbuttons form{
   margin:3;
 }
+.headerbuttons button{
+  background-color:unset;
+  border:unset;
+  color:#e5734a;
+  font-size:17px;
+  font-family:monospace;
+  font-weight:100;
+  border:unset;
+
+}
+
 
 .buttons {
   margin:10;
