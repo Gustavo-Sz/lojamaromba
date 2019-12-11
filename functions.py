@@ -157,9 +157,9 @@ class banco_de_dados():
         except:
             return "Não foi possível buscar as informações no banco de dados"
 
-        if preco_antigo == int(preco_novo):
+        if float(preco_antigo) == float(preco_novo):
             return "O produto já está nesse preço"
-        elif preco_antigo < int(preco_novo):
+        elif float(preco_antigo) < float(preco_novo):
             return "Isso não é uma promoção"
 
         db.close()
