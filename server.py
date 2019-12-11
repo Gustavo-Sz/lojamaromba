@@ -93,7 +93,8 @@ def editarCatalogo():
                 return redirect(url_for('addpromo'))
             elif request.form['opcao'] == "rempromo":
                 return redirect(url_for('rempromo'))
-
+            elif request.form['opcao'] == "alteraritem":
+                return redirect(url_for("edititem"))
 
 @app.route('/editar/additem', methods=['GET', 'POST'])
 def additem():
