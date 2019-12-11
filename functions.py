@@ -159,6 +159,8 @@ class banco_de_dados():
 
         if preco_antigo == int(preco_novo):
             return "O produto já está nesse preço"
+        elif preco_antigo < int(preco_novo):
+            return "Isso não é uma promoção"
 
         db.close()
         status = self.att_preco(codigo_item, preco_novo) 
@@ -273,6 +275,7 @@ class banco_de_dados():
             return "Duvida enviada. Aguarde um email de resposta."
 
     def listar_duvidas(self):
+
         db = self.__conectardb()
         cur = db.cursor()
         cur.execute("""
@@ -280,3 +283,11 @@ class banco_de_dados():
         """)
         duvidas = cur.fetchall()
         return duvidas
+    
+    def deletar_duvida(self, nome, codigo):
+
+        db = self.__conectardb()
+        cur = db.cursor()
+        cur.execute("DELETE FROM duvidas WHERE codigo = (?) AND nome = (?) ", (codigo, nome))
+        db.commit()
+        db.close()

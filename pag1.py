@@ -172,15 +172,10 @@ def carrinho():
     pass
 
 
-@app.route('/conta', methods=['GET', 'POST'])
-def minhaConta():
-    pass
-
-
 @app.route('/logout', methods=['GET', 'POST'])
 def sair():
     session['logado'] = False
-    if session['admin']:
+    if session.get('admin'):
         session['admin'] = False
     return redirect(url_for('home'))
 
@@ -270,6 +265,8 @@ def responderduvida():
     item = db.buscar_item((codigo,))
     nome_item = item[1]
     enviar_email(nome, nome_item, email, resposta)
+    
+    db.deletar_duvida(nome, codigo)
     return redirect(url_for("home"))
 
 webbrowser.open('http:\\localhost:5000', new=1)

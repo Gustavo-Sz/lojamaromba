@@ -14,7 +14,9 @@
                             {% if login: %}
                                 {% if admin: %}
                                     <a href="{{url_for('editarCatalogo')}}"class="buttons" id="bt5">Editar Catálogo</a>
-                                    <a href="{{url_for('duvidas')}}" class="buttons" id="bt3">Duvidas</a>
+                                    <form class="buttons" action="/duvidas" method="POST">
+                                        <button name="opcao" value="ler">Duvidas</button>
+                                    </form>
                                 {% endif %}
                                 <a href="{{url_for('sair')}}" class="buttons" id='bt6'>Sair</a>
                             {% else: %}

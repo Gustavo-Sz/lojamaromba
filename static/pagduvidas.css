@@ -37,6 +37,7 @@ body{
 
 .painelduvida img{
   width:15vh;
+
 }
 .cima{
   margin:10;
@@ -87,6 +88,7 @@ body{
   margin:10;
   display:flex;
   flex-direction:row;
+  height:25vh;
   width:100%;
 }
 
@@ -109,6 +111,10 @@ body{
   flex-direction:column;
   justify-content:center;
   align-items:center;
+}
+
+.cardduvida img{
+  width: 15vh;
 }
 
 .info .nome{
@@ -150,6 +156,16 @@ body{
   padding:0 10 0 0;
 }
 
+.headerbuttons form{
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  padding:unset;
+}
+
+.headerbuttons form button{
+  padding:0 10 0 10;
+}
 .headerbuttons a, .headerbuttons form{
   margin:3;
 }

@@ -52,6 +52,16 @@ body{
   padding:0 10 0 0;
 }
 
+.headerbuttons form{
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  padding:unset;
+}
+
+.headerbuttons form button{
+  padding:0 10 0 10;
+}
 .headerbuttons a, .headerbuttons form{
   margin:3;
 }
