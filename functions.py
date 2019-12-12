@@ -26,7 +26,7 @@ def lista_de_categorias():
 
 def enviar_email(nome, nome_item, email, resposta):
     server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-    server.login("lojamaromba.duvidas", "xjpyukqzjygwneip")
+    server.login("lojamaromba.duvidas@gmail.com", "xjpyukqzjygwneip")
     msg = """Ola %s. Aqui esta a resposta para sua duvida sobre nosso produto '%s'.
      %s""" % (nome, nome_item, resposta)
     server.sendmail(
