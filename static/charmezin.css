@@ -68,12 +68,16 @@ body{
 .headerbuttons button{
   background-color:unset;
   border:unset;
-  color:#e5734a;
+  color:white;
   font-size:17px;
   font-family:monospace;
   font-weight:100;
   border:unset;
 
+}
+
+.headerbuttons button:hover{
+  color:#ff734a;
 }
 
 
@@ -91,9 +95,10 @@ body{
 }
 
 .buttons {
-  color:#e5734a;
+  color:#ffffff;
 }
 .buttons:hover{
+  color:#ff734a;
   background-color:#e48b7185;
 }
 
@@ -113,7 +118,7 @@ ul {
   background-color: unset;
   border: unset;
   display: block;
-  color: #ff734a;
+  color: #ffffff;
   text-align: center;
   font-family:monospace;
   font-size:18;
@@ -124,6 +129,7 @@ ul {
 
 .bar li button:hover {
   cursor: pointer;
+  color:#ff734a;
   background-color:#b088eb8a;
   transform: scale(1.1);
 }
