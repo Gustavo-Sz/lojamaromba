@@ -13,10 +13,12 @@ def home():
     db = banco_de_dados()
     itens_novos = db.buscar_itens_novos()
     itens_promo = db.buscar_promos()
+    print(itens_promo)
     for x in range(len(itens_promo)):
         itens_promo[x][4] = "static/imgprodutos/"+str(itens_promo[x][4])
     for x in range(len(itens_novos)):
         itens_novos[x] = [itens_novos[x][0], itens_novos[x][1], itens_novos[x][2], "static/imgprodutos/"+str(itens_novos[x][3])]
+    print(itens_promo)
     return render_template('home.html', login=session.get('logado'), admin =session.get('admin'), novos_itens = itens_novos, promo_itens = itens_promo)
 
 
@@ -27,7 +29,7 @@ def cadastrar():
         dados = [request.form['nome'], request.form['email'], request.form['senha']]
         if dados[0] != "" and dados[1] != "" and dados[2] != "":
             db = banco_de_dados()
-            a = [dados[0], dados[1], dados[2], None]
+            a = [None, dados[0], dados[1], dados[2]]
             status = db.cadastrar_usuario(a)
             if status:
                 global usuario
@@ -80,7 +82,7 @@ def logar():
 @app.route('/editar', methods=['GET', 'POST'])
 def editarCatalogo():
 
-    if session['admin']:
+    if session.get('admin'):
         if request.method == 'GET':
             return render_template("editar_catalogo.html", acao="editarcatalogo",login=session.get('logado'), admin =session.get('admin'))
         elif request.method == 'POST':
@@ -98,7 +100,7 @@ def editarCatalogo():
 
 @app.route('/editar/additem', methods=['GET', 'POST'])
 def additem():
-    if session['admin']:
+    if session.get('admin'):
         if request.method == 'GET':
             return render_template("editar_catalogo.html", acao="opcao1",login=session.get('logado'), admin =session.get('admin'), categs = lista_de_categorias().keys())
         elif request.method == 'POST':
@@ -113,18 +115,19 @@ def additem():
             if nome == "" or arq_img == "" or preco == "" or categoria == "":
                 flash("Preencha todos os campos !")
             else:
-                try:
-                    codigo = db.cria_codigo(categoria)
-                    db.add_item(codigo, nome, preco, categoria, arq_img, descricao)
+                
+                codigo = db.cria_codigo(categoria)
+                status = db.add_item(codigo, nome, preco, categoria, arq_img, descricao)
+                if status == True:
                     flash('Item adicionado !')
-                except:
-                    flash('Algo deu errado !')
+                else:
+                    flash(status)
             return render_template("editar_catalogo.html",acao="opcao1",login=session.get('logado'), admin =session.get('admin'), categs = lista_de_categorias().keys())
 
 
 @app.route('/editar/remitem', methods=['GET', 'POST'])
 def remitem():
-    if session['admin']:
+    if session.get('admin'):
         if request.method == 'GET':
             return render_template('editar_catalogo.html', acao="opcao2",login=session.get('logado'), admin =session.get('admin'))
         elif request.method == 'POST':    
@@ -140,7 +143,7 @@ def remitem():
 
 @app.route('/editar/addpromo', methods=['GET', 'POST'])
 def addpromo():
-    if session['admin']:
+    if session.get('admin'):
         if request.method == 'GET':
             return render_template("editar_catalogo.html", acao ="addpromo", login=session.get('logado'), admin =session.get('admin'))
         elif request.method == 'POST':
@@ -158,7 +161,7 @@ def addpromo():
 
 @app.route("/editar/rempromo", methods=['GET', 'POST'])
 def rempromo():
-    if session['admin']:
+    if session.get('admin'):
         if request.method == 'GET':
             return render_template("editar_catalogo.html", acao="rempromo", login=session.get('logado'), admin=session.get('admin'))
         elif request.method == 'POST':

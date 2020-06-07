@@ -12,6 +12,10 @@ body{
   background-color: rgba(0, 0, 0, 0.15);
 }
 
+button{
+  outline: none;
+}
+
 .painel-principal{
   width:90%;
 }

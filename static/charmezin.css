@@ -13,6 +13,9 @@ body{
   background-color: rgba(0, 0, 0, 0.15);
 }
 
+button{
+  outline:none;
+}
 .painel-principal{
   width:90%;
 }
@@ -59,6 +62,8 @@ body{
 }
 
 .headerbuttons form button{
+  height:100%;
+  width:100%;
   padding:0 10 0 10;
 }
 
@@ -233,9 +238,11 @@ input:focus{
 }
 
 .addpromobt a{
-  font-family:sans-serif;
- margin:42 35 42 35;
+  font-family:serif;
+ height:40vh;
+ width:23vh;
  display:flex;
+ align-items:center;
  flex-direction:column;
  justify-content:center;
  text-decoration:none; 
